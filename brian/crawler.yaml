@@ -6,7 +6,7 @@ metadata:
     app: crawler
   namespace: test
 spec:
-  replicas: 1
+  replicas: 4
   selector:
     matchLabels:
       app: crawler
@@ -16,13 +16,13 @@ spec:
         app: crawler
     spec:
       imagePullSecrets: 
-        - name: myregistrykey
+        - name: regcred
       containers:
       - name: crawler
         # image: mongo:latest
-        image: tig4605246/ubuntu_util:0.2
+        image: ny40ny40ny/crawler:latest
         ports:
-        - containerPort: 80
+        - containerPort: 7878
           name: crawler
         resources:
           requests:

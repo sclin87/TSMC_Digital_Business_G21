@@ -119,8 +119,8 @@ class GoogleCrawler():
 if __name__ == "__main__":
     query = "TSMC ASML"
     crawler = GoogleCrawler()
-    results = crawler.google_search(query , 'qdr:w' , '10')
-    print(results[:3])
+    #results = crawler.google_search(query , 'qdr:w' , '10')
+    #print(results[:3])
 
     HOST = '0.0.0.0'
     PORT = 7878
@@ -133,9 +133,9 @@ if __name__ == "__main__":
         conn, addr = s.accept()
         print('connected by ' + str(addr))
         indata = conn.recv(1024)
-        print(indata.decode())
-        # Target_URL = 'https://taipeitimes.com/News/biz/archives/2022/01/20/2003771688'
-        Target_URL = indata.decode()
+        #print(indata.decode())
+        Target_URL = 'https://taipeitimes.com/News/biz/archives/2022/01/20/2003771688'
+        #Target_URL = indata.decode()
         response = crawler.get_source(Target_URL)
         soup = crawler.html_parser(response.text)
         orignal_text = crawler.html_getText(soup)
@@ -145,6 +145,6 @@ if __name__ == "__main__":
         whitelist = ['ASML' , 'Intel']
         end_result = crawler.get_wordcount_json(whitelist , result_wordcount)
         print(end_result)
-        crawler.jsonarray_toexcel(end_result, time.time() + ".xlsx")
+        crawler.jsonarray_toexcel(end_result, str(time.time()) + ".xlsx")
         print('Excel is OK')
         s.close()
