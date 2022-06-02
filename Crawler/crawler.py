@@ -88,14 +88,13 @@ def job(conn,addr):
         response = crawler.get_source(Target_URL)
         soup = crawler.html_parser(response.text)
         orignal_text = crawler.html_getText(soup)
-        print(orignal_text[:100])
+        #print(orignal_text[:100])
         result_wordcount = crawler.word_count(orignal_text)
-        result_wordcount
         whitelist = ['ASML' , 'Intel', 'TSMC']
         end_result = crawler.get_wordcount_json(whitelist , result_wordcount)
-        print(end_result)
+        #print(end_result)
         crawler.jsonarray_toexcel(end_result, str(time.time()) + ".xlsx")
-        print('Excel is OK')
+        print('Excel is OK : ' + str(time.time()) + ".xlsx")
         #s.close()
 
 if __name__ == "__main__":
