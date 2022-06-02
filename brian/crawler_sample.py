@@ -124,18 +124,20 @@ if __name__ == "__main__":
 
     HOST = '0.0.0.0'
     PORT = 7878
-    s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    s.bind((HOST,PORT))
-    s.listen(2)
+    
 
     while(1):
+        s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        s.bind((HOST,PORT))
+        s.listen()
         print("Listen at port 7878:")
         conn, addr = s.accept()
         print('connected by ' + str(addr))
         indata = conn.recv(1024)
-        #print(indata.decode())
         #Target_URL = 'https://taipeitimes.com/News/biz/archives/2022/01/20/2003771688'
-        Target_URL = indata.decode()
+        if indata[-1] == '\n':
+            indata = indata[:-1]
+        Target_URL = indata.decode('ascii')
         response = crawler.get_source(Target_URL)
         soup = crawler.html_parser(response.text)
         orignal_text = crawler.html_getText(soup)
