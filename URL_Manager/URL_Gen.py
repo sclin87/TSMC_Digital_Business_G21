@@ -3,7 +3,7 @@ from requests_html import HTML, HTMLSession
 import requests
 import sys, os, time, schedule, socket
 
-service_host = "localhost"
+service_host = "140.113.68.204"
 service_port = 7878
 
 class UrlGenerator():

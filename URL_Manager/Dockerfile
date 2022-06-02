@@ -3,4 +3,4 @@ COPY . /work
 WORKDIR /work
 RUN pip install --upgrade pip
 RUN pip install -r ./requirements.txt
-CMD ["python","./URL_Gen.py"]
+CMD ["python","-u","./URL_Gen.py"]
