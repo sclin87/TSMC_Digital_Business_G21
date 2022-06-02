@@ -4,7 +4,7 @@ metadata:
   name: crawler-deployment
   labels:
     app: crawler
-  namespace: test
+  namespace: default
 spec:
   replicas: 4
   selector:
