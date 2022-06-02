@@ -133,6 +133,7 @@ if __name__ == "__main__":
         conn, addr = s.accept()
         print('connected by ' + str(addr))
         indata = conn.recv(1024)
+        print(indata.decode())
         # Target_URL = 'https://taipeitimes.com/News/biz/archives/2022/01/20/2003771688'
         Target_URL = indata.decode()
         response = crawler.get_source(Target_URL)
