@@ -119,34 +119,41 @@ class GoogleCrawler():
 if __name__ == "__main__":
     query = "TSMC ASML"
     crawler = GoogleCrawler()
-    #results = crawler.google_search(query , 'qdr:w' , '10')
-    #print(results[:3])
-
-    HOST = '0.0.0.0'
-    PORT = 7878
     
-
     while(1):
+        HOST = '0.0.0.0'
+        PORT = 7878
+        url = ""
+        Target_URL = ""
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         s.bind((HOST,PORT))
         s.listen()
         print("Listen at port 7878:")
         conn, addr = s.accept()
         print('connected by ' + str(addr))
-        indata = conn.recv(1024)
-        #Target_URL = 'https://taipeitimes.com/News/biz/archives/2022/01/20/2003771688'
-        if indata[-1] == '\n':
-            indata = indata[:-1]
-        Target_URL = indata.decode('ascii')
-        response = crawler.get_source(Target_URL)
-        soup = crawler.html_parser(response.text)
-        orignal_text = crawler.html_getText(soup)
-        print(orignal_text[:100])
-        result_wordcount = crawler.word_count(orignal_text)
-        result_wordcount
-        whitelist = ['ASML' , 'Intel']
-        end_result = crawler.get_wordcount_json(whitelist , result_wordcount)
-        print(end_result)
-        crawler.jsonarray_toexcel(end_result, str(time.time()) + ".xlsx")
-        print('Excel is OK')
+        while(1):
+            
+            indata = conn.recv(1024).decode('ascii')
+            if(len(indata) == 0):
+                break
+            #Target_URL = 'https://taipeitimes.com/News/biz/archives/2022/01/20/2003771688'
+            if indata[-1] != '\n':
+                url += indata
+                continue
+            if indata[-1] == '\n':
+                url = indata[:-1]
+                Target_URL = url
+                url = ""
+
+            response = crawler.get_source(Target_URL)
+            soup = crawler.html_parser(response.text)
+            orignal_text = crawler.html_getText(soup)
+            print(orignal_text[:100])
+            result_wordcount = crawler.word_count(orignal_text)
+            result_wordcount
+            whitelist = ['ASML' , 'Intel']
+            end_result = crawler.get_wordcount_json(whitelist , result_wordcount)
+            print(end_result)
+            crawler.jsonarray_toexcel(end_result, str(time.time()) + ".xlsx")
+            print('Excel is OK')
         s.close()
