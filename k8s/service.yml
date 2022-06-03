@@ -9,7 +9,7 @@ spec:
   selector:
     app: crawler
   ports:
-  - name: crawler-port
-    port: 7878
-    protocol: TCP
-    targetPort: 7878
+    - name: crawler-port
+      port: 7878
+      protocol: TCP
+      targetPort: 7878

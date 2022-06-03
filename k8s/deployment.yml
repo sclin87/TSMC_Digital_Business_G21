@@ -56,18 +56,22 @@ spec:
       imagePullSecrets: 
         - name: regcred
       containers:
-      - name: url-manager-ctn
-        # image: mongo:latest
-        # image: ny40ny40ny/crawler:latest
-        # image: yuchen2856/url-manager:latest
-        image: gcr.io/PROJECT_ID/URL_MANAGER_IMAGE:TAG
-        ports:
-        - name: url-manager-p
-          containerPort: 3005
-        # resources:
-        #   requests:
-        #     cpu: 1
-        #     memory: 1Gi
-        #   limits:
-        #     cpu: 1
-        #     memory: 1Gi
+        - name: url-manager-ctn
+          # image: ny40ny40ny/crawler:latest
+          # image: yuchen2856/url-manager:latest
+          image: gcr.io/PROJECT_ID/URL_MANAGER_IMAGE:TAG
+          ports:
+            - name: url-manager-p
+              containerPort: 3005
+          env:
+            - name: SERVICE_HOST
+              value: "crawler-service"
+            - name: SERVICE_PORT
+              value: "7878"
+          # resources:
+          #   requests:
+          #     cpu: 1
+          #     memory: 1Gi
+          #   limits:
+          #     cpu: 1
+          #     memory: 1Gi
