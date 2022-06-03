@@ -62,7 +62,7 @@ spec:
         # image: yuchen2856/url-manager:latest
         image: gcr.io/PROJECT_ID/URL_MANAGER_IMAGE:TAG
         ports:
-        - name: url-manager-port
+        - name: url-manager-p
           containerPort: 3005
         # resources:
         #   requests:
