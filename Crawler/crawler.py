@@ -11,6 +11,7 @@ import socket
 import time
 import threading
 import re
+import datetime
 
 nltk.download('stopwords')
 nltk.download('punkt')
@@ -71,7 +72,7 @@ class GoogleCrawler():
 
 def job(conn,addr):
     buf = ""
-    print('connected by ' + str(addr))
+    print('connected by ' + str(addr), end='')
     while(1):
         data0 = conn.recv(1024)
         indata = data0.decode('ascii')
@@ -87,16 +88,36 @@ def job(conn,addr):
         buf = ""
         Target_Date = Date_URL.split()[0]
         
-        pattern = re.compile("[0-9]+-[0-9]+-[0-9]+")
-        if(len(Date_URL.split()) != 2 or not pattern.match(Target_Date)):
-            print(Target_Date,"Invaild")
+        if(len(Date_URL.split()) != 2):
+            #print("\033[93m Wrong Format, it should be \"{Date} {URL}\" \033[0m")
+            conn.send("\033[93m Error: Format should be \"{Date} {URL}\\n\" \033[0m".encode('ascii'))
+            conn.close()
+            break
+        pattern = re.compile("\d{4}-\d{2}-\d{2}")
+        if(not pattern.match(Target_Date)):
+            #print("\033[93m", Target_Date, " isn't valid date format.\033[0m")
             conn.send("\033[93m Error: Invalid Date format. \033[0m".encode('ascii'))
             conn.close()
             break
-        Target_URL = Date_URL.split()[1]
+        try:
+            L = Target_Date.split("-")
+            datetime.datetime(year=int(L[0]),month=int(L[1]),day=int(L[2]))
+        except:
+            #print("\033[93m " + Target_Date, " is out of bound.\033[0m")
+            conn.send(("\033[93m " + Target_Date + " is out of bound.\033[0m").encode('ascii'))
+            conn.close()
+            break
 
-        response = crawler.get_source(Target_URL)
-        soup = crawler.html_parser(response.text)
+        Target_URL = Date_URL.split()[1]
+        
+        try:
+            response = crawler.get_source(Target_URL)
+            soup = crawler.html_parser(response.text)
+        except:
+            print("URL is invalid.")
+            conn.send("\033[93m Error: URL is invalid.\033[0m".encode("ascii"))
+            conn.close()
+            break
         orignal_text = crawler.html_getText(soup)
         #print(orignal_text[:100])
         result_wordcount = crawler.word_count(orignal_text)
@@ -105,7 +126,8 @@ def job(conn,addr):
         #print(end_result)
         crawler.jsonarray_toexcel(end_result, str(time.time()) + ".xlsx")
         print('Excel is OK : ' + str(time.time()) + ".xlsx")
-        conn.send("Success.".encode("ascii"))
+        conn.send("Success, Excel is OK.".encode("ascii"))
+        break
     conn.close()
 
 if __name__ == "__main__":
@@ -119,7 +141,7 @@ if __name__ == "__main__":
     threads = []
     
     while(1):
-        print("Listen at port 7878:")
+        print("\n\nListen at port 7878:")
         conn, addr = s.accept()
         threads.append(threading.Thread(target = job, args = (conn, addr)))
         threads[len(threads)-1].start()
