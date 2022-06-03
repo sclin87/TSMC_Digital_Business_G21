@@ -1,4 +1,6 @@
 #from sqlite3.dbapi2 import _Statement
+import json
+from urllib import response
 import requests
 import urllib
 import pandas as pd
@@ -14,12 +16,13 @@ import threading
 import re
 import datetime
 import sqlite3
+import requests
 
 nltk.download('stopwords')
 nltk.download('punkt')
 
 DB_path = "data/WordCount.db"
-
+Flask_server = "http://localhost:5000/word_count"
 class GoogleCrawler():
     
     def __init__(self):
@@ -73,7 +76,10 @@ class GoogleCrawler():
         df = pd.DataFrame(data=data_array)
         df.to_excel(out_file , index=False)
         return
-
+    def jsonarray_to_server(self,data_array):
+        for json in data_array:
+            response = requests.post(Flask_server, json=json)
+            print(response.status_code)
 def writeToDB(datas):
     conn = sqlite3.connect(DB_path)
     conn.execute('''CREATE TABLE IF NOT EXISTS WordCountTable (
@@ -155,7 +161,8 @@ def job(conn,addr):
         end_result = crawler.get_wordcount_json(whitelist , result_wordcount, Target_Date)
         print(end_result)
         crawler.jsonarray_toexcel(end_result, str(time.time()) + ".xlsx")
-        writeToDB(end_result)
+        #writeToDB(end_result)
+        crawler.jsonarray_to_server(end_result)
         print('Excel is OK : ' + str(time.time()) + ".xlsx")
         conn.send("Success, Excel is OK.".encode("ascii"))
         break
