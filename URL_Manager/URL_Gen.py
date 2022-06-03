@@ -3,8 +3,10 @@ from requests_html import HTML, HTMLSession
 import requests
 import sys, os, time, schedule, socket
 
-service_host = "140.113.68.204"
-service_port = 7878
+service_host = os.getenv("SERVICE_HOST")
+service_port = int(os.getenv("SERVICE_PORT"))
+# service_host = "140.113.68.204"
+# service_port = 7878
 
 class UrlGenerator():
     def __init__(self):
@@ -66,7 +68,7 @@ def generate_url():
         urlGenerator.google_search(query+sup, timeline='qdr:m', page='100')
         print(sup + ":")
         for res in urlGenerator.results:
-            print('-', res['title'])
+            # print('-', res['title'])
             if res['link'] not in results:
                 results.append(res['link'])
         urlGenerator.results.clear()
@@ -89,7 +91,7 @@ def send_links(links):
 
 # Repeat the Job every hour
 #@schedule.repeat(schedule.every().hour)
-@schedule.repeat(schedule.every(60).minutes)
+@schedule.repeat(schedule.every(0.5).minutes)
 def job():
     print(time_str())
     results = generate_url()
