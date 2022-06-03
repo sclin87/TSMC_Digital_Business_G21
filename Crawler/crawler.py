@@ -84,7 +84,6 @@ def writeToDB(datas):
             );''')
     for dict1 in datas:
         l = list(dict1.values())
-        rows.append(l)
         cursor = conn.execute("SELECT WordCount FROM WordCountTable where Date = \"" + str(l[0]) + "\" and Company = \"" + str(l[1]) + "\";")
         has_instance = 0
         WordCount = 0
