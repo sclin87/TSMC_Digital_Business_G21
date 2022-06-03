@@ -14,9 +14,9 @@ class UrlGenerator():
         self.results = []
 
     # Google search with queries and parameters
-    def google_search(self, query, timeline='qdr:h', page='10', retry=10):
+    def google_search(self, query, time='qdr:m', num='100', retry=10):
         search_url = self.url + query + \
-            '&tbs={timeline}&start={page}&lr=lang_en'.format(timeline=timeline, page=page)
+            '&tbm=nws&tbs={time}&num={num}&lr=lang_en'.format(time=time, num=num)
         response = self.get_source(search_url)
         retry_count = 0
         while response is None:
@@ -40,16 +40,14 @@ class UrlGenerator():
 
     # Google Search Result Parsing
     def parse_googleResults(self, response):
-        css_identifier_result = "tF2Cxc"
-        css_identifier_title = "h3"
-        css_identifier_link = "yuRUbf"
+        css_identifier_title = "mCBkyc y355M JQe2Ld nDgy9d"
+        css_identifier_link = "WlydOe"
         soup = BeautifulSoup(response.text, 'html.parser')
-        results = soup.findAll("div", {"class": css_identifier_result})
-        for result in results:
-            title = result.find(css_identifier_title).get_text()
-            link = result.find("div", {"class": css_identifier_link}).find(
-                href=True)['href']
-            self.results.append({'title': title, 'link': link})
+
+        titles = soup.findAll("div", {"class": css_identifier_title})
+        links = soup.findAll("a", {"class": css_identifier_link})
+        for title, link in zip(titles, links):
+            self.results.append({'title': title.get_text() ,'link': link['href']})
 
 
 urlGenerator = UrlGenerator()
@@ -65,8 +63,8 @@ def generate_url():
     supplier = ["Applied Materials", "ASML", "SUMCO"]
     results = []
     for sup in supplier:
-        urlGenerator.google_search(query+sup, timeline='qdr:m', page='100')
-        print(sup + ":")
+        urlGenerator.google_search(query+sup, time='qdr:m', num='100')
+        # print(sup + ":")
         for res in urlGenerator.results:
             # print('-', res['title'])
             if res['link'] not in results:
@@ -91,7 +89,7 @@ def send_links(links):
 
 # Repeat the Job every hour
 #@schedule.repeat(schedule.every().hour)
-@schedule.repeat(schedule.every(0.5).minutes)
+@schedule.repeat(schedule.every(30).seconds)
 def job():
     print(time_str())
     results = generate_url()
@@ -106,4 +104,4 @@ if __name__ == '__main__':
     # Check pending job every 5 minutes
     while True:
         schedule.run_pending()
-        time.sleep(300)
+        time.sleep(10)
