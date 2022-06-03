@@ -21,7 +21,7 @@ import requests
 nltk.download('stopwords')
 nltk.download('punkt')
 
-DB_path = "data/WordCount.db"
+DB_path = "WordCount.db"
 Flask_server = "http://localhost:5000/word_count"
 class GoogleCrawler():
     
@@ -122,9 +122,9 @@ def job(conn,addr):
         Date_URL = buf + indata[:-1]
         buf = ""
         Target_Date = Date_URL.split()[0]
-        
+        print("\nDate_URL  ", Date_URL)
         if(len(Date_URL.split()) != 2):
-            #print("\033[93m Wrong Format, it should be \"{Date} {URL}\" \033[0m")
+            print("\033[93m Wrong Format, it should be \"{Date} {URL}\" \033[0m")
             conn.send("\033[93m Error: Format should be \"{Date} {URL}\\n\" \033[0m".encode('ascii'))
             conn.close()
             break
