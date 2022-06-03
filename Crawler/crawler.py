@@ -10,6 +10,7 @@ from nltk.tokenize import word_tokenize
 import socket
 import time
 import threading
+import re
 
 nltk.download('stopwords')
 nltk.download('punkt')
@@ -69,7 +70,7 @@ class GoogleCrawler():
         return
 
 def job(conn,addr):
-    url = ""
+    buf = ""
     print('connected by ' + str(addr))
     while(1):
         data0 = conn.recv(1024)
@@ -79,11 +80,20 @@ def job(conn,addr):
             break
         #Target_URL = 'https://taipeitimes.com/News/biz/archives/2022/01/20/2003771688'
         if indata[-1] != '\n':
-            url += indata
+            buf += indata
             continue
         
-        Target_URL = url + indata[:-1]
-        url = ""
+        Date_URL = buf + indata[:-1]
+        buf = ""
+        Target_Date = Date_URL.split()[0]
+        
+        pattern = re.compile("[0-9]+-[0-9]+-[0-9]+")
+        if(len(Date_URL.split()) != 2 or not pattern.match(Target_Date)):
+            print(Target_Date,"Invaild")
+            conn.send("\033[93m Error: Invalid Date format. \033[0m".encode('ascii'))
+            conn.close()
+            break
+        Target_URL = Date_URL.split()[1]
 
         response = crawler.get_source(Target_URL)
         soup = crawler.html_parser(response.text)
@@ -95,7 +105,8 @@ def job(conn,addr):
         #print(end_result)
         crawler.jsonarray_toexcel(end_result, str(time.time()) + ".xlsx")
         print('Excel is OK : ' + str(time.time()) + ".xlsx")
-        #s.close()
+        conn.send("Success.".encode("ascii"))
+    conn.close()
 
 if __name__ == "__main__":
     query = "TSMC ASML"
