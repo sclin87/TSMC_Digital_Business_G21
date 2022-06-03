@@ -44,20 +44,20 @@ jobs:
     # Build the Docker image
     - name: BuildCrawler
       run: |-
+        cd ./Crawler
         docker build \
           --tag "gcr.io/$PROJECT_ID/$CRAWLER_IMAGE:$GITHUB_SHA" \
           --build-arg GITHUB_SHA="$GITHUB_SHA" \
           --build-arg GITHUB_REF="$GITHUB_REF" \
-          -f "Crawler/Dockerfile" \
           .
     
     - name: BuildUrlManager
       run: |-
+        cd ./URL_Manager
         docker build \
           --tag "gcr.io/$PROJECT_ID/$URL_MANAGER_IMAGE:$GITHUB_SHA" \
           --build-arg GITHUB_SHA="$GITHUB_SHA" \
           --build-arg GITHUB_REF="$GITHUB_REF" \
-          -f "URL_Manager/Dockerfile" \
           .
 
     # Push the Docker image to Google Container Registry
