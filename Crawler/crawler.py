@@ -1,3 +1,4 @@
+#from sqlite3.dbapi2 import _Statement
 import requests
 import urllib
 import pandas as pd
@@ -12,9 +13,12 @@ import time
 import threading
 import re
 import datetime
+import sqlite3
 
 nltk.download('stopwords')
 nltk.download('punkt')
+
+DB_path = "data/WordCount.db"
 
 class GoogleCrawler():
     
@@ -53,13 +57,13 @@ class GoogleCrawler():
                 else:
                     counts[word] = 1
         return counts
-    def get_wordcount_json(self,whitelist , dict_data):
+    def get_wordcount_json(self, whitelist , dict_data, date):
         data_array = []
         for i in whitelist:
             if(i not in dict_data):
-                dict_data[i] = 0
+                dict_data[i] = 10
             json_data = {
-                'Date' : 'Week1',
+                'Date' : date,
                 'Company' : i , 
                 'Count' : dict_data[i]
             }
@@ -69,6 +73,32 @@ class GoogleCrawler():
         df = pd.DataFrame(data=data_array)
         df.to_excel(out_file , index=False)
         return
+
+def writeToDB(datas):
+    conn = sqlite3.connect(DB_path)
+    conn.execute('''CREATE TABLE IF NOT EXISTS WordCountTable (
+            Date TEXT NOT NULL,
+            Company TEXT NOT NULL,
+            WordCount INT NOT NULL,
+            PRIMARY KEY (Date, Company)
+            );''')
+    for dict1 in datas:
+        l = list(dict1.values())
+        rows.append(l)
+        cursor = conn.execute("SELECT WordCount FROM WordCountTable where Date = \"" + str(l[0]) + "\" and Company = \"" + str(l[1]) + "\";")
+        has_instance = 0
+        WordCount = 0
+        for row in cursor:
+            WordCount += row[0]
+            has_instance = 1
+        if(not has_instance):
+            conn.execute("INSERT INTO WordCountTable VALUES (\"" + str(l[0]) + "\", \"" + str(l[1]) + "\"," + str(l[2]) + ")")
+        else:
+            WordCount += l[2]
+            conn.execute("UPDATE WordCountTable SET WordCount = \"" + str(WordCount) + "\" where Date = \"" + str(l[0]) + "\" and Company = \"" + str(l[1]) + "\";")
+    conn.commit()
+    conn.close()
+    return
 
 def job(conn,addr):
     buf = ""
@@ -121,10 +151,12 @@ def job(conn,addr):
         orignal_text = crawler.html_getText(soup)
         #print(orignal_text[:100])
         result_wordcount = crawler.word_count(orignal_text)
-        whitelist = ['ASML' , 'Intel', 'TSMC']
-        end_result = crawler.get_wordcount_json(whitelist , result_wordcount)
-        #print(end_result)
+        whitelist = ['ASML' , 'Applied Materials', 'TSMC']
+        print(result_wordcount)
+        end_result = crawler.get_wordcount_json(whitelist , result_wordcount, Target_Date)
+        print(end_result)
         crawler.jsonarray_toexcel(end_result, str(time.time()) + ".xlsx")
+        writeToDB(end_result)
         print('Excel is OK : ' + str(time.time()) + ".xlsx")
         conn.send("Success, Excel is OK.".encode("ascii"))
         break
