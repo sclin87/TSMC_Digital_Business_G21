@@ -86,30 +86,7 @@ class GoogleCrawler():
         for json in data_array:
             response = requests.post(Flask_server, json=json)
             print(response.status_code)
-def writeToDB(datas):
-    conn = sqlite3.connect(DB_path)
-    conn.execute('''CREATE TABLE IF NOT EXISTS WordCountTable (
-            Date TEXT NOT NULL,
-            Company TEXT NOT NULL,
-            WordCount INT NOT NULL,
-            PRIMARY KEY (Date, Company)
-            );''')
-    for dict1 in datas:
-        l = list(dict1.values())
-        cursor = conn.execute("SELECT WordCount FROM WordCountTable where Date = \"" + str(l[0]) + "\" and Company = \"" + str(l[1]) + "\";")
-        has_instance = 0
-        WordCount = 0
-        for row in cursor:
-            WordCount += row[0]
-            has_instance = 1
-        if(not has_instance):
-            conn.execute("INSERT INTO WordCountTable VALUES (\"" + str(l[0]) + "\", \"" + str(l[1]) + "\"," + str(l[2]) + ")")
-        else:
-            WordCount += l[2]
-            conn.execute("UPDATE WordCountTable SET WordCount = \"" + str(WordCount) + "\" where Date = \"" + str(l[0]) + "\" and Company = \"" + str(l[1]) + "\";")
-    conn.commit()
-    conn.close()
-    return
+
 
 def job(conn,addr):
     buf = ""
@@ -136,7 +113,7 @@ def job(conn,addr):
             break
         pattern = re.compile("\d{4}-\d{2}-\d{2}")
         if(not pattern.match(Target_Date)):
-            #print("\033[93m", Target_Date, " isn't valid date format.\033[0m")
+            print("\033[93m", Target_Date, " isn't valid date format.\033[0m")
             conn.send("\033[93m Error: Invalid Date format. \033[0m".encode('ascii'))
             conn.close()
             break
@@ -144,7 +121,7 @@ def job(conn,addr):
             L = Target_Date.split("-")
             datetime.datetime(year=int(L[0]),month=int(L[1]),day=int(L[2]))
         except:
-            #print("\033[93m " + Target_Date, " is out of bound.\033[0m")
+            print("\033[93m " + Target_Date, " is out of bound.\033[0m")
             conn.send(("\033[93m " + Target_Date + " is out of bound.\033[0m").encode('ascii'))
             conn.close()
             break
@@ -166,7 +143,7 @@ def job(conn,addr):
         print(result_wordcount)
         end_result = crawler.get_wordcount_json(whitelist , result_wordcount, Target_Date)
         print(end_result)
-        crawler.jsonarray_toexcel(end_result, str(time.time()) + ".xlsx")
+        #crawler.jsonarray_toexcel(end_result, str(time.time()) + ".xlsx")
         #writeToDB(end_result)
         crawler.jsonarray_to_server(end_result)
         print('Excel is OK : ' + str(time.time()) + ".xlsx")
