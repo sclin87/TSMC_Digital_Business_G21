@@ -1,9 +1,9 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: crawler-deployment
+  name: crawler-dpm
   labels:
-    app: crawler
+    app: crawler-dpm
   namespace: default
 spec:
   replicas: 2
@@ -18,14 +18,14 @@ spec:
       imagePullSecrets: 
         - name: regcred
       containers:
-      - name: crawler
+      - name: crawler-ctn
         # image: mongo:latest
         # image: ny40ny40ny/crawler:latest
         # image: yuchen2856/crawler:latest
         image: gcr.io/PROJECT_ID/CRAWLER_IMAGE:TAG
         ports:
         - containerPort: 7878
-          name: crawler
+          name: crawler-p
         # resources:
         #   requests:
         #     cpu: 1
@@ -39,9 +39,9 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: url-manager-deployment
+  name: url-manager-dpm
   labels:
-    app: url-manager-deployment
+    app: url-manager-dpm
   namespace: default
 spec:
   replicas: 1
@@ -56,7 +56,7 @@ spec:
       imagePullSecrets: 
         - name: regcred
       containers:
-      - name: url-manager-container
+      - name: url-manager-ctn
         # image: mongo:latest
         # image: ny40ny40ny/crawler:latest
         # image: yuchen2856/url-manager:latest

@@ -9,7 +9,7 @@ env:
   PROJECT_ID: ${{ secrets.GKE_PROJECT }}
   GKE_CLUSTER: crawler-cluster    # TODO: update to cluster name
   GKE_ZONE: asia-east1   # TODO: update to cluster zone
-  DEPLOYMENT_NAME: crawler-deployment # TODO: update to deployment name
+  DEPLOYMENT_NAME: crawler-dpm # TODO: update to deployment name
   CRAWLER_IMAGE: crawler-image
   URL_MANAGER_IMAGE: url-manager-image
 
