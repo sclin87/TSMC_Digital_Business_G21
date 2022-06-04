@@ -1,9 +1,6 @@
 #from sqlite3.dbapi2 import _Statement
-import json
 from urllib import response
-from flask import Flask
 import requests
-import urllib
 import pandas as pd
 from requests_html import HTML
 from requests_html import HTMLSession
@@ -16,7 +13,6 @@ import time
 import threading
 import re
 import datetime
-import sqlite3
 import requests
 import os
 
