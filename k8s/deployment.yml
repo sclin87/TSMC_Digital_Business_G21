@@ -131,7 +131,7 @@ spec:
       imagePullSecrets: 
         - name: regcred
       containers:
-        - name: url-manager-ctn
+        - name: url-manager-tsmc
           # image: ny40ny40ny/crawler:latest
           # image: yuchen2856/url-manager:latest
           image: gcr.io/PROJECT_ID/URL_MANAGER_IMAGE:TAG
@@ -143,6 +143,44 @@ spec:
               value: "crawler-service"
             - name: SERVICE_PORT
               value: "7878"
+            - name: GOOGLE_KEY
+              value: "TSMC"
+        - name: url-manager-asml
+          image: gcr.io/PROJECT_ID/URL_MANAGER_IMAGE:TAG
+          ports:
+            - name: url-manager-p
+              containerPort: 3005
+          env:
+            - name: SERVICE_HOST
+              value: "crawler-service"
+            - name: SERVICE_PORT
+              value: "7878"
+            - name: GOOGLE_KEY
+              value: "ASML"
+        - name: url-manager-appmat
+          image: gcr.io/PROJECT_ID/URL_MANAGER_IMAGE:TAG
+          ports:
+            - name: url-manager-p
+              containerPort: 3005
+          env:
+            - name: SERVICE_HOST
+              value: "crawler-service"
+            - name: SERVICE_PORT
+              value: "7878"
+            - name: GOOGLE_KEY
+              value: "Applied+Materials"
+        - name: url-manager-sumco
+          image: gcr.io/PROJECT_ID/URL_MANAGER_IMAGE:TAG
+          ports:
+            - name: url-manager-p
+              containerPort: 3005
+          env:
+            - name: SERVICE_HOST
+              value: "crawler-service"
+            - name: SERVICE_PORT
+              value: "7878"
+            - name: GOOGLE_KEY
+              value: "SUMCO"
           # resources:
           #   requests:
           #     cpu: 1
