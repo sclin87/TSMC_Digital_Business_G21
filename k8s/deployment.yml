@@ -55,7 +55,8 @@ spec:
           - mountPath: /var/lib/grafana
             name: shared-data
       - name: flask
-        image: asia.gcr.io/final-project-2-352117/flask_server:latest
+        # image: asia.gcr.io/final-project-2-352117/flask_server:latest
+        image: gcr.io/PROJECT_ID/FLASK_SERVER_IMAGE:TAG
         volumeMounts:
         - name: shared-data
           mountPath: /var/lib/grafana
@@ -91,6 +92,11 @@ spec:
         ports:
         - containerPort: 7878
           name: crawler-p
+        env:
+          - name: SERVICE_HOST
+            value: "grafana"
+          - name: SERVICE_PORT
+            value: "5000"
         # resources:
         #   requests:
         #     cpu: 1
