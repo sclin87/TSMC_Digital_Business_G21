@@ -3,13 +3,12 @@ import sqlite3
 
 app = Flask(__name__)
 
+DB_path = "./WordCount.db"
 
-
-#post /store data: {name :}
 @app.route('/word_count' , methods=['POST'])
 def create_store():
     request_data = request.get_json()
-    conn = sqlite3.connect('data/WordCount.db')
+    conn = sqlite3.connect(DB_path)
     conn.execute('''CREATE TABLE IF NOT EXISTS WordCountTable (
             Date TEXT NOT NULL,
             Company TEXT NOT NULL,
