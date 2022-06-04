@@ -140,14 +140,15 @@ def job(conn,addr):
         #print(orignal_text[:100])
         result_wordcount = crawler.word_count(orignal_text)
         whitelist = ['ASML' , 'Applied Materials', 'TSMC', 'SUMCO']
-        print(result_wordcount)
+        #print(result_wordcount)
         end_result = crawler.get_wordcount_json(whitelist , result_wordcount, Target_Date)
-        print(end_result)
+        #print(end_result)
         #crawler.jsonarray_toexcel(end_result, str(time.time()) + ".xlsx")
         #writeToDB(end_result)
         crawler.jsonarray_to_server(end_result)
-        print('Excel is OK : ' + str(time.time()) + ".xlsx")
-        conn.send("Success, Excel is OK.".encode("ascii"))
+        #print('Excel is OK : ' + str(time.time()) + ".xlsx")
+        print("[", datetime.datetime.now().strftime("%H:%M:%S"), "]")
+        conn.send("Job success".encode("ascii"))
         break
     conn.close()
 
