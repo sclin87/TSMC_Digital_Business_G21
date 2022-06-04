@@ -139,7 +139,7 @@ def job(conn,addr):
         orignal_text = crawler.html_getText(soup)
         #print(orignal_text[:100])
         result_wordcount = crawler.word_count(orignal_text)
-        whitelist = ['ASML' , 'Applied Materials', 'TSMC']
+        whitelist = ['ASML' , 'Applied Materials', 'TSMC', 'SUMCO']
         print(result_wordcount)
         end_result = crawler.get_wordcount_json(whitelist , result_wordcount, Target_Date)
         print(end_result)
