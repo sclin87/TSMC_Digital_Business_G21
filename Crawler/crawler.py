@@ -1,8 +1,6 @@
 #from sqlite3.dbapi2 import _Statement
-import json
 from urllib import response
 import requests
-import urllib
 import pandas as pd
 from requests_html import HTML
 from requests_html import HTMLSession
@@ -15,7 +13,6 @@ import time
 import threading
 import re
 import datetime
-import sqlite3
 import requests
 import os
 
@@ -28,6 +25,7 @@ service_host = os.getenv("SERVICE_HOST")
 service_port = os.getenv("SERVICE_PORT")
 #Flask_server = "http://localhost:5000/word_count"
 Flask_server = "http://" + service_host + ":" + service_port + "/word_count"
+print("host :", Flask_server)
 
 class GoogleCrawler():
     
