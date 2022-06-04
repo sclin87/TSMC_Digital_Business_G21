@@ -12,6 +12,7 @@ env:
   DEPLOYMENT_NAME: crawler-dpm # TODO: update to deployment name
   CRAWLER_IMAGE: crawler-image
   URL_MANAGER_IMAGE: url-manager-image
+  FLASK_SERVER_IMAGE: flask-server-image
 
 jobs:
   setup-build-publish-deploy:
@@ -59,15 +60,26 @@ jobs:
           --build-arg GITHUB_SHA="$GITHUB_SHA" \
           --build-arg GITHUB_REF="$GITHUB_REF" \
           .
+    
+    - name: BuildFlaskServer
+      run: |-
+        cd ./Flask_server
+        docker build \
+          --tag "gcr.io/$PROJECT_ID/$FLASK_SERVER_IMAGE:$GITHUB_SHA" \
+          --build-arg GITHUB_SHA="$GITHUB_SHA" \
+          --build-arg GITHUB_REF="$GITHUB_REF" \
+          .
 
     # Push the Docker image to Google Container Registry
     - name: Publish
       run: |-
         docker push "gcr.io/$PROJECT_ID/$CRAWLER_IMAGE:$GITHUB_SHA"
-
-    - name: Publish
-      run: |-
         docker push "gcr.io/$PROJECT_ID/$URL_MANAGER_IMAGE:$GITHUB_SHA"
+        docker push "gcr.io/$PROJECT_ID/$FLASK_SERVER_IMAGE:$GITHUB_SHA"
+
+    # - name: Publish
+    #   run: |-
+    #     docker push "gcr.io/$PROJECT_ID/$URL_MANAGER_IMAGE:$GITHUB_SHA"
 
     # Set up kustomize
     - name: Set up Kustomize
@@ -82,6 +94,7 @@ jobs:
         cd ./k8s # 如果 mainfest 是放在某一個資料夾，這邊要替換成該資料夾名稱
         ./kustomize edit set image gcr.io/PROJECT_ID/CRAWLER_IMAGE:TAG=gcr.io/$PROJECT_ID/$CRAWLER_IMAGE:$GITHUB_SHA
         ./kustomize edit set image gcr.io/PROJECT_ID/URL_MANAGER_IMAGE:TAG=gcr.io/$PROJECT_ID/$URL_MANAGER_IMAGE:$GITHUB_SHA
+        ./kustomize edit set image gcr.io/PROJECT_ID/FLASK_SERVER_IMAGE:TAG=gcr.io/$PROJECT_ID/$FLASK_SERVER_IMAGE:$GITHUB_SHA
         ./kustomize build . | kubectl apply -f -
         kubectl rollout status deployment/$DEPLOYMENT_NAME
         kubectl get services -o wide

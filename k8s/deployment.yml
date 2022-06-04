@@ -55,31 +55,14 @@ spec:
           - mountPath: /var/lib/grafana
             name: shared-data
       - name: flask
-        image: asia.gcr.io/final-project-2-352117/flask_server:latest
+        # image: asia.gcr.io/final-project-2-352117/flask_server:latest
+        image: gcr.io/PROJECT_ID/FLASK_SERVER_IMAGE:TAG
         volumeMounts:
         - name: shared-data
           mountPath: /var/lib/grafana
         ports:
         - containerPort: 5000
----
-  apiVersion: v1
-  kind: Service
-  metadata:
-    name: grafana
-  spec:
-    ports:
-    - port: 3000
-      name: grafana-port
-      protocol: TCP
-      targetPort: http-grafana
-    - port: 5000
-      name: flask-server-port
-      protocol: TCP
-      targetPort: flask-server
-    selector:
-      app: grafana
-    sessionAffinity: None
-    type: LoadBalancer
+
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -109,6 +92,11 @@ spec:
         ports:
         - containerPort: 7878
           name: crawler-p
+        env:
+          - name: SERVICE_HOST
+            value: "grafana"
+          - name: SERVICE_PORT
+            value: "5000"
         # resources:
         #   requests:
         #     cpu: 1
@@ -116,10 +104,7 @@ spec:
         #   limits:
         #     cpu: 1
         #     memory: 1Gi
-      volumes:
-      - name: grafana-pv
-        persistentVolumeClaim:
-          claimName: grafana-pvc
+
 
 ---
 
