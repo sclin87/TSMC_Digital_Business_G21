@@ -132,7 +132,7 @@ spec:
           value: "crawler-service"
         - name: SERVICE_PORT
           value: "7878"
-        - name: GOOGLE_KEY
+        - name: GOOGLE_KEYWORD
           value: "TSMC"
 
 ---
@@ -158,7 +158,7 @@ spec:
           value: "crawler-service"
         - name: SERVICE_PORT
           value: "7878"
-        - name: GOOGLE_KEY
+        - name: GOOGLE_KEYWORD
           value: "ASML"
 
 ---
@@ -184,7 +184,7 @@ spec:
           value: "crawler-service"
         - name: SERVICE_PORT
           value: "7878"
-        - name: GOOGLE_KEY
+        - name: GOOGLE_KEYWORD
           value: "Applied+Materials"
 
 ---
@@ -210,5 +210,5 @@ spec:
           value: "crawler-service"
         - name: SERVICE_PORT
           value: "7878"
-        - name: GOOGLE_KEY
+        - name: GOOGLE_KEYWORD
           value: "SUMCO"
