@@ -98,10 +98,7 @@ spec:
         #   limits:
         #     cpu: 1
         #     memory: 1Gi
-      volumes:
-      - name: grafana-pv
-        persistentVolumeClaim:
-          claimName: grafana-pvc
+
 
 ---
 
