@@ -67,6 +67,7 @@ spec:
         - containerPort: 5000
 
 ---
+
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -75,7 +76,7 @@ metadata:
     app: crawler-dpm
   namespace: default
 spec:
-  replicas: 4
+  replicas: 3
   selector:
     matchLabels:
       app: crawler

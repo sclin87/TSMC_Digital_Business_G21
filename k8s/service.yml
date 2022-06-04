@@ -24,11 +24,11 @@ spec:
   - port: 3000
     name: grafana-port
     protocol: TCP
-    targetPort: http-grafana
+    targetPort: 3000
   - port: 5000
     name: flask-server-port
     protocol: TCP
-    targetPort: flask-server
+    targetPort: 5000
   selector:
     app: grafana
   sessionAffinity: None
