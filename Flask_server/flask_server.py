@@ -1,9 +1,11 @@
 from flask import Flask,jsonify,request,render_template
 import sqlite3
+import os 
 
 app = Flask(__name__)
 
-DB_path = "./WordCount.db"
+DB_dir = os.getenv("DB_DIR")
+DB_path = DB_dir + "/WordCount.db"
 
 @app.route('/word_count' , methods=['POST'])
 def create_store():

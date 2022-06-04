@@ -60,6 +60,9 @@ spec:
         volumeMounts:
         - name: shared-data
           mountPath: /var/lib/grafana
+        env:
+          name: DB_PATH
+          value: "/var/lib/grafana"
         ports:
         - containerPort: 5000
 
