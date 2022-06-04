@@ -111,13 +111,13 @@ spec:
 
 ---
 
-apiVersion: apps/v1
+apiVersion: v1
 kind: Pod
 metadata:
   name: url-manager-tsmc
   labels:
     app: url-manager-pod
-  namespace: default
+  #namespace: default
 spec:
   imagePullSecrets: 
     - name: regcred
@@ -137,13 +137,13 @@ spec:
 
 ---
 
-apiVersion: apps/v1
+apiVersion: v1
 kind: Pod
 metadata:
   name: url-manager-asml
   labels:
     app: url-manager-pod
-  namespace: default
+  #namespace: default
 spec:
   imagePullSecrets: 
     - name: regcred
@@ -163,13 +163,13 @@ spec:
 
 ---
 
-apiVersion: apps/v1
+apiVersion: v1
 kind: Pod
 metadata:
   name: url-manager-appmat
   labels:
     app: url-manager-pod
-  namespace: default
+  #namespace: default
 spec:
   imagePullSecrets: 
     - name: regcred
@@ -189,13 +189,13 @@ spec:
 
 ---
 
-apiVersion: apps/v1
+apiVersion: v1
 kind: Pod
 metadata:
   name: url-manager-sumco
   labels:
     app: url-manager-pod
-  namespace: default
+  #namespace: default
 spec:
   imagePullSecrets: 
     - name: regcred
