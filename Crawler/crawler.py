@@ -25,7 +25,7 @@ nltk.download('punkt')
 DB_path = "WordCount.db"
 
 service_host = os.getenv("SERVICE_HOST")
-service_port = int(os.getenv("SERVICE_PORT"))
+service_port = os.getenv("SERVICE_PORT")
 #Flask_server = "http://localhost:5000/word_count"
 Flask_server = "http://" + service_host + ":" + service_port + "/word_count"
 
