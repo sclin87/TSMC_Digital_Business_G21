@@ -1,8 +1,9 @@
 from bs4 import BeautifulSoup
 from requests_html import HTMLSession
-import requests, schedule
-import sys, os, socket, time, datetime
+import requests
+import sys, os, socket, time, datetime, random
 
+base_date = datetime.date(2019, 1, 1) # (Y, M, D)
 service_host = os.getenv("SERVICE_HOST")
 service_port = int(os.getenv("SERVICE_PORT"))
 #service_host = "140.113.68.204"
@@ -56,6 +57,7 @@ class UrlGenerator():
         search_time = self.get_google_search_date(date)
         links = []
         for query in self.queries:
+            self.random_wait()
             results = self.google_search(query, time=search_time, num=num)
             for res in results:
                 if res['link'] not in results:
@@ -70,6 +72,11 @@ class UrlGenerator():
                 month=date.month, day=date.day, year=date.year
             )
 
+    # Random wait to avoid Google's detection
+    def random_wait(self):
+        t = random.uniform(10, 30)
+        time.sleep(t)
+
 # Get Current Time (UTC+8)
 def cur_time_str():
     tz = datetime.timezone(datetime.timedelta(hours=8))
@@ -77,36 +84,29 @@ def cur_time_str():
 
 def send_links(links, date):
     try:
-        print('Sending Links to %s:%d' % (service_host, service_port))
+        print('[' + cur_time_str() + '] Sending links to %s:%d' % (service_host, service_port))
         for link in links:
             sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
             sock.connect((service_host, service_port))
-            print('-', link)
             outstr = date.strftime('%Y-%m-%d') + ' ' + link + '\n'
             sock.sendall(outstr.encode('ascii'))
             sock.close()
+        print('[' + cur_time_str() + '] Sent %d link(s) in %s' % (len(links), date.strftime('%Y-%m-%d')))
     except socket.error as e:
         print(e, file=sys.stderr)
         os._exit(1)
 
-base_date = datetime.date(2019, 1, 1) # (Y, M, D)
-target_date = base_date
-
-# Repeat the Job
-@schedule.repeat(schedule.every(30).seconds)
-def job():
-    print(cur_time_str())
-    global target_date
-    generator = UrlGenerator()
-    results = generator.generate_url(target_date, num=20)
-    send_links(results, target_date)
-    target_date = target_date + datetime.timedelta(days=1)
-
 if __name__ == '__main__':
-    # Initial Job
-    job()
+    generator = UrlGenerator()
 
+    # Initial Job
+    links = generator.generate_url(base_date, num=20)
+    send_links(links, base_date)
+    base_date = base_date + datetime.timedelta(days=1)
+    
     # Check pending job before sleep
     while True:
-        schedule.run_pending()
-        time.sleep(10)
+        links = generator.generate_url(base_date, num=20)
+        send_links(links, base_date)
+        base_date = base_date + datetime.timedelta(days=1)
+        generator.random_wait()
