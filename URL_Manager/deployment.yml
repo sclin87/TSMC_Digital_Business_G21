@@ -1,0 +1,40 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: url-manager-dpm
+  labels:
+    app: url-manager-dpm
+  namespace: default
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: url-manager
+  template:
+    metadata:
+      labels:
+        app: url-manager
+    spec:
+      imagePullSecrets: 
+        - name: regcred
+      containers:
+        - name: url-manager-ctn
+          # image: ny40ny40ny/crawler:latest
+          # image: yuchen2856/url-manager:latest
+          image: gcr.io/PROJECT_ID/URL_MANAGER_IMAGE:TAG
+          ports:
+            - name: url-manager-p
+              containerPort: 3005
+          env:
+            - name: SERVICE_HOST
+              value: "crawler-service"
+            - name: SERVICE_PORT
+              value: "7878"
+          # resources:
+          #   requests:
+          #     cpu: 1
+          #     memory: 1Gi
+          #   limits:
+          #     cpu: 1
+          #     memory: 1Gi

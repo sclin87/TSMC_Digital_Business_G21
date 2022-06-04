@@ -31,8 +31,9 @@ def create_store():
     conn.commit()
     conn.close()
     new_store = {
-        'name': 'fwfewfwf',
-        'items':[]
+        'Date': str(l[0]),
+        'Company': str(l[1]),
+        'Count': str(WordCount)
     }
     return jsonify(new_store)
 
