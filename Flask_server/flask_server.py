@@ -10,6 +10,7 @@ DB_path = DB_dir + "/WordCount.db"
 @app.route('/word_count' , methods=['POST'])
 def create_store():
     request_data = request.get_json()
+    print("connect to DB")
     conn = sqlite3.connect(DB_path)
     conn.execute('''CREATE TABLE IF NOT EXISTS WordCountTable (
             Date TEXT NOT NULL,
