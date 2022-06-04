@@ -20,7 +20,6 @@ kind: Service
 metadata:
   name: grafana
 spec:
-  type: NodePort
   ports:
   - port: 3000
     name: grafana-port
@@ -33,3 +32,4 @@ spec:
   selector:
     app: grafana
   sessionAffinity: None
+  type: LoadBalancer
