@@ -63,43 +63,22 @@ def send_links(links, date):
         print(e, file=sys.stderr)
         os._exit(1)
 
-def search_tsmc():
+def search_func(query):
     global base_date
-    print('[%s] TSMC @ %s' % (cur_time_str(), base_date.strftime('%Y-%m-%d')))
+    print('[%s] %s @ %s' % (cur_time_str(), query, base_date.strftime('%Y-%m-%d')))
     generator = UrlGenerator()
-    links = generator.generate_url(base_date, 'TSMC', num=100)
-    send_links(links, base_date)
-
-def search_asml():
-    global base_date
-    print('[%s] ASML @ %s' % (cur_time_str(), base_date.strftime('%Y-%m-%d')))
-    generator = UrlGenerator()
-    links = generator.generate_url(base_date, 'ASML', num=100)
-    send_links(links, base_date)
-
-def search_applmat():
-    global base_date
-    print('[%s] APPLIED @ %s' % (cur_time_str(), base_date.strftime('%Y-%m-%d')))
-    generator = UrlGenerator()
-    links = generator.generate_url(base_date, 'Applied+Materials', num=100)
-    send_links(links, base_date)
-
-def search_sumco():
-    global base_date
-    print('[%s] SUMCO @ %s' % (cur_time_str(), base_date.strftime('%Y-%m-%d')))
-    generator = UrlGenerator()
-    links = generator.generate_url(base_date, 'SUMCO', num=100)
+    links = generator.generate_url(base_date, query, num=100)
     send_links(links, base_date)
 
 @schedule.repeat(schedule.every(32).minutes)
 def search():
-    search_tsmc()
+    search_func('TSMC')
     time.sleep(475)
-    search_asml()
+    search_func('ASML')
     time.sleep(475)
-    search_applmat()
+    search_func('Applied+Materials')
     time.sleep(475)
-    search_sumco()
+    search_func('SUMCO')
     global base_date
     base_date = base_date - datetime.timedelta(days=pods)
 

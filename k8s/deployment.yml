@@ -13,7 +13,6 @@ spec:
   template:
     metadata:
       labels:
-        # app: grafana
         visual-app: grafana
         db-app: flask-server
     spec:
@@ -58,7 +57,6 @@ spec:
           - mountPath: /var/lib/grafana
             name: shared-data
       - name: flask
-        # image: asia.gcr.io/final-project-2-352117/flask_server:latest
         image: gcr.io/PROJECT_ID/FLASK_SERVER_IMAGE:TAG
         volumeMounts:
         - name: shared-data
@@ -79,7 +77,7 @@ metadata:
     app: crawler-dpm
   namespace: default
 spec:
-  replicas: 4
+  replicas: 16
   selector:
     matchLabels:
       app: crawler
@@ -92,9 +90,6 @@ spec:
         - name: regcred
       containers:
       - name: crawler-ctn
-        # image: mongo:latest
-        # image: ny40ny40ny/crawler:latest
-        # image: yuchen2856/crawler:latest
         image: gcr.io/PROJECT_ID/CRAWLER_IMAGE:TAG
         ports:
         - containerPort: 7878
@@ -104,115 +99,3 @@ spec:
             value: "flask-service"
           - name: SERVICE_PORT
             value: "5000"
-        # resources:
-        #   requests:
-        #     cpu: 1
-        #     memory: 1Gi
-        #   limits:
-        #     cpu: 1
-        #     memory: 1Gi
-
-
----
-
-apiVersion: v1
-kind: Pod
-metadata:
-  name: url-manager-tsmc
-  labels:
-    app: url-manager-pod
-  #namespace: default
-spec:
-  imagePullSecrets: 
-    - name: regcred
-  containers:
-    - name: url-manager-tsmc
-      image: gcr.io/PROJECT_ID/URL_MANAGER_IMAGE:TAG
-      ports:
-        - name: url-manager-p
-          containerPort: 3005
-      env:
-        - name: SERVICE_HOST
-          value: "crawler-service"
-        - name: SERVICE_PORT
-          value: "7878"
-        - name: GOOGLE_KEYWORD
-          value: "TSMC"
-
----
-
-apiVersion: v1
-kind: Pod
-metadata:
-  name: url-manager-asml
-  labels:
-    app: url-manager-pod
-  #namespace: default
-spec:
-  imagePullSecrets: 
-    - name: regcred
-  containers:
-    - name: url-manager-asml
-      image: gcr.io/PROJECT_ID/URL_MANAGER_IMAGE:TAG
-      ports:
-        - name: url-manager-p
-          containerPort: 3005
-      env:
-        - name: SERVICE_HOST
-          value: "crawler-service"
-        - name: SERVICE_PORT
-          value: "7878"
-        - name: GOOGLE_KEYWORD
-          value: "ASML"
-
----
-
-apiVersion: v1
-kind: Pod
-metadata:
-  name: url-manager-appmat
-  labels:
-    app: url-manager-pod
-  #namespace: default
-spec:
-  imagePullSecrets: 
-    - name: regcred
-  containers:
-    - name: url-manager-appmat
-      image: gcr.io/PROJECT_ID/URL_MANAGER_IMAGE:TAG
-      ports:
-        - name: url-manager-p
-          containerPort: 3005
-      env:
-        - name: SERVICE_HOST
-          value: "crawler-service"
-        - name: SERVICE_PORT
-          value: "7878"
-        - name: GOOGLE_KEYWORD
-          value: "Applied+Materials"
-
----
-
-apiVersion: v1
-kind: Pod
-metadata:
-  name: url-manager-sumco
-  labels:
-    app: url-manager-pod
-  #namespace: default
-spec:
-  imagePullSecrets: 
-    - name: regcred
-  containers:
-    - name: url-manager-sumco
-      image: gcr.io/PROJECT_ID/URL_MANAGER_IMAGE:TAG
-      ports:
-        - name: url-manager-p
-          containerPort: 3005
-      env:
-        - name: SERVICE_HOST
-          value: "crawler-service"
-        - name: SERVICE_PORT
-          value: "7878"
-        - name: GOOGLE_KEYWORD
-          value: "SUMCO"
