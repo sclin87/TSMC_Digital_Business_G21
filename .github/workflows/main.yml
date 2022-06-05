@@ -4,7 +4,7 @@ on:
   push:
     branches:
     - yuchen
-    - main
+    # - main
 # //
 env:
   PROJECT_ID: ${{ secrets.GKE_PROJECT }}
