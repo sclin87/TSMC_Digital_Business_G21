@@ -12,7 +12,9 @@ spec:
   template:
     metadata:
       labels:
-        app: grafana
+        # app: grafana
+        visual-app: grafana
+        db-app: flask-server
     spec:
       volumes:
       - name: shared-data
@@ -98,7 +100,7 @@ spec:
           name: crawler-p
         env:
           - name: SERVICE_HOST
-            value: "grafana"
+            value: "flask-service"
           - name: SERVICE_PORT
             value: "5000"
         # resources:
