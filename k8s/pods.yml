@@ -1,0 +1,797 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: url-manager-pod-0
+  labels:
+    app: url-manager-pod
+spec:
+  imagePullSecrets: 
+    - name: regcred
+  containers:
+    - name: url-manager-pod-0
+      image: gcr.io/PROJECT_ID/URL_MANAGER_IMAGE:TAG
+      ports:
+        - name: url-manager-p
+          containerPort: 3005
+      env:
+        - name: SERVICE_HOST
+          value: "crawler-service"
+        - name: SERVICE_PORT
+          value: "7878"
+        - name: BASE_DATE
+          value: "2022-05-31"
+
+---
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: url-manager-pod-1
+  labels:
+    app: url-manager-pod
+spec:
+  imagePullSecrets: 
+    - name: regcred
+  containers:
+    - name: url-manager-pod-1
+      image: gcr.io/PROJECT_ID/URL_MANAGER_IMAGE:TAG
+      ports:
+        - name: url-manager-p
+          containerPort: 3005
+      env:
+        - name: SERVICE_HOST
+          value: "crawler-service"
+        - name: SERVICE_PORT
+          value: "7878"
+        - name: BASE_DATE
+          value: "2022-05-30"
+
+---
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: url-manager-pod-2
+  labels:
+    app: url-manager-pod
+spec:
+  imagePullSecrets: 
+    - name: regcred
+  containers:
+    - name: url-manager-pod-2
+      image: gcr.io/PROJECT_ID/URL_MANAGER_IMAGE:TAG
+      ports:
+        - name: url-manager-p
+          containerPort: 3005
+      env:
+        - name: SERVICE_HOST
+          value: "crawler-service"
+        - name: SERVICE_PORT
+          value: "7878"
+        - name: BASE_DATE
+          value: "2022-05-29"
+
+---
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: url-manager-pod-3
+  labels:
+    app: url-manager-pod
+spec:
+  imagePullSecrets: 
+    - name: regcred
+  containers:
+    - name: url-manager-pod-3
+      image: gcr.io/PROJECT_ID/URL_MANAGER_IMAGE:TAG
+      ports:
+        - name: url-manager-p
+          containerPort: 3005
+      env:
+        - name: SERVICE_HOST
+          value: "crawler-service"
+        - name: SERVICE_PORT
+          value: "7878"
+        - name: BASE_DATE
+          value: "2022-05-28"
+
+---
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: url-manager-pod-4
+  labels:
+    app: url-manager-pod
+spec:
+  imagePullSecrets: 
+    - name: regcred
+  containers:
+    - name: url-manager-pod-4
+      image: gcr.io/PROJECT_ID/URL_MANAGER_IMAGE:TAG
+      ports:
+        - name: url-manager-p
+          containerPort: 3005
+      env:
+        - name: SERVICE_HOST
+          value: "crawler-service"
+        - name: SERVICE_PORT
+          value: "7878"
+        - name: BASE_DATE
+          value: "2022-05-27"
+
+---
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: url-manager-pod-5
+  labels:
+    app: url-manager-pod
+spec:
+  imagePullSecrets: 
+    - name: regcred
+  containers:
+    - name: url-manager-pod-5
+      image: gcr.io/PROJECT_ID/URL_MANAGER_IMAGE:TAG
+      ports:
+        - name: url-manager-p
+          containerPort: 3005
+      env:
+        - name: SERVICE_HOST
+          value: "crawler-service"
+        - name: SERVICE_PORT
+          value: "7878"
+        - name: BASE_DATE
+          value: "2022-05-26"
+
+---
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: url-manager-pod-6
+  labels:
+    app: url-manager-pod
+spec:
+  imagePullSecrets: 
+    - name: regcred
+  containers:
+    - name: url-manager-pod-6
+      image: gcr.io/PROJECT_ID/URL_MANAGER_IMAGE:TAG
+      ports:
+        - name: url-manager-p
+          containerPort: 3005
+      env:
+        - name: SERVICE_HOST
+          value: "crawler-service"
+        - name: SERVICE_PORT
+          value: "7878"
+        - name: BASE_DATE
+          value: "2022-05-25"
+
+---
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: url-manager-pod-7
+  labels:
+    app: url-manager-pod
+spec:
+  imagePullSecrets: 
+    - name: regcred
+  containers:
+    - name: url-manager-pod-7
+      image: gcr.io/PROJECT_ID/URL_MANAGER_IMAGE:TAG
+      ports:
+        - name: url-manager-p
+          containerPort: 3005
+      env:
+        - name: SERVICE_HOST
+          value: "crawler-service"
+        - name: SERVICE_PORT
+          value: "7878"
+        - name: BASE_DATE
+          value: "2022-05-24"
+
+---
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: url-manager-pod-8
+  labels:
+    app: url-manager-pod
+spec:
+  imagePullSecrets: 
+    - name: regcred
+  containers:
+    - name: url-manager-pod-8
+      image: gcr.io/PROJECT_ID/URL_MANAGER_IMAGE:TAG
+      ports:
+        - name: url-manager-p
+          containerPort: 3005
+      env:
+        - name: SERVICE_HOST
+          value: "crawler-service"
+        - name: SERVICE_PORT
+          value: "7878"
+        - name: BASE_DATE
+          value: "2022-05-23"
+
+---
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: url-manager-pod-9
+  labels:
+    app: url-manager-pod
+spec:
+  imagePullSecrets: 
+    - name: regcred
+  containers:
+    - name: url-manager-pod-9
+      image: gcr.io/PROJECT_ID/URL_MANAGER_IMAGE:TAG
+      ports:
+        - name: url-manager-p
+          containerPort: 3005
+      env:
+        - name: SERVICE_HOST
+          value: "crawler-service"
+        - name: SERVICE_PORT
+          value: "7878"
+        - name: BASE_DATE
+          value: "2022-05-22"
+
+---
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: url-manager-pod-10
+  labels:
+    app: url-manager-pod
+spec:
+  imagePullSecrets: 
+    - name: regcred
+  containers:
+    - name: url-manager-pod-10
+      image: gcr.io/PROJECT_ID/URL_MANAGER_IMAGE:TAG
+      ports:
+        - name: url-manager-p
+          containerPort: 3005
+      env:
+        - name: SERVICE_HOST
+          value: "crawler-service"
+        - name: SERVICE_PORT
+          value: "7878"
+        - name: BASE_DATE
+          value: "2022-05-21"
+
+---
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: url-manager-pod-11
+  labels:
+    app: url-manager-pod
+spec:
+  imagePullSecrets: 
+    - name: regcred
+  containers:
+    - name: url-manager-pod-11
+      image: gcr.io/PROJECT_ID/URL_MANAGER_IMAGE:TAG
+      ports:
+        - name: url-manager-p
+          containerPort: 3005
+      env:
+        - name: SERVICE_HOST
+          value: "crawler-service"
+        - name: SERVICE_PORT
+          value: "7878"
+        - name: BASE_DATE
+          value: "2022-05-20"
+
+---
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: url-manager-pod-12
+  labels:
+    app: url-manager-pod
+spec:
+  imagePullSecrets: 
+    - name: regcred
+  containers:
+    - name: url-manager-pod-12
+      image: gcr.io/PROJECT_ID/URL_MANAGER_IMAGE:TAG
+      ports:
+        - name: url-manager-p
+          containerPort: 3005
+      env:
+        - name: SERVICE_HOST
+          value: "crawler-service"
+        - name: SERVICE_PORT
+          value: "7878"
+        - name: BASE_DATE
+          value: "2022-05-19"
+
+---
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: url-manager-pod-13
+  labels:
+    app: url-manager-pod
+spec:
+  imagePullSecrets: 
+    - name: regcred
+  containers:
+    - name: url-manager-pod-13
+      image: gcr.io/PROJECT_ID/URL_MANAGER_IMAGE:TAG
+      ports:
+        - name: url-manager-p
+          containerPort: 3005
+      env:
+        - name: SERVICE_HOST
+          value: "crawler-service"
+        - name: SERVICE_PORT
+          value: "7878"
+        - name: BASE_DATE
+          value: "2022-05-18"
+
+---
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: url-manager-pod-14
+  labels:
+    app: url-manager-pod
+spec:
+  imagePullSecrets: 
+    - name: regcred
+  containers:
+    - name: url-manager-pod-14
+      image: gcr.io/PROJECT_ID/URL_MANAGER_IMAGE:TAG
+      ports:
+        - name: url-manager-p
+          containerPort: 3005
+      env:
+        - name: SERVICE_HOST
+          value: "crawler-service"
+        - name: SERVICE_PORT
+          value: "7878"
+        - name: BASE_DATE
+          value: "2022-05-17"
+
+---
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: url-manager-pod-15
+  labels:
+    app: url-manager-pod
+spec:
+  imagePullSecrets: 
+    - name: regcred
+  containers:
+    - name: url-manager-pod-15
+      image: gcr.io/PROJECT_ID/URL_MANAGER_IMAGE:TAG
+      ports:
+        - name: url-manager-p
+          containerPort: 3005
+      env:
+        - name: SERVICE_HOST
+          value: "crawler-service"
+        - name: SERVICE_PORT
+          value: "7878"
+        - name: BASE_DATE
+          value: "2022-05-16"
+
+---
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: url-manager-pod-16
+  labels:
+    app: url-manager-pod
+spec:
+  imagePullSecrets: 
+    - name: regcred
+  containers:
+    - name: url-manager-pod-16
+      image: gcr.io/PROJECT_ID/URL_MANAGER_IMAGE:TAG
+      ports:
+        - name: url-manager-p
+          containerPort: 3005
+      env:
+        - name: SERVICE_HOST
+          value: "crawler-service"
+        - name: SERVICE_PORT
+          value: "7878"
+        - name: BASE_DATE
+          value: "2022-05-15"
+
+---
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: url-manager-pod-17
+  labels:
+    app: url-manager-pod
+spec:
+  imagePullSecrets: 
+    - name: regcred
+  containers:
+    - name: url-manager-pod-17
+      image: gcr.io/PROJECT_ID/URL_MANAGER_IMAGE:TAG
+      ports:
+        - name: url-manager-p
+          containerPort: 3005
+      env:
+        - name: SERVICE_HOST
+          value: "crawler-service"
+        - name: SERVICE_PORT
+          value: "7878"
+        - name: BASE_DATE
+          value: "2022-05-14"
+
+---
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: url-manager-pod-18
+  labels:
+    app: url-manager-pod
+spec:
+  imagePullSecrets: 
+    - name: regcred
+  containers:
+    - name: url-manager-pod-18
+      image: gcr.io/PROJECT_ID/URL_MANAGER_IMAGE:TAG
+      ports:
+        - name: url-manager-p
+          containerPort: 3005
+      env:
+        - name: SERVICE_HOST
+          value: "crawler-service"
+        - name: SERVICE_PORT
+          value: "7878"
+        - name: BASE_DATE
+          value: "2022-05-13"
+
+---
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: url-manager-pod-19
+  labels:
+    app: url-manager-pod
+spec:
+  imagePullSecrets: 
+    - name: regcred
+  containers:
+    - name: url-manager-pod-19
+      image: gcr.io/PROJECT_ID/URL_MANAGER_IMAGE:TAG
+      ports:
+        - name: url-manager-p
+          containerPort: 3005
+      env:
+        - name: SERVICE_HOST
+          value: "crawler-service"
+        - name: SERVICE_PORT
+          value: "7878"
+        - name: BASE_DATE
+          value: "2022-05-12"
+
+---
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: url-manager-pod-20
+  labels:
+    app: url-manager-pod
+spec:
+  imagePullSecrets: 
+    - name: regcred
+  containers:
+    - name: url-manager-pod-20
+      image: gcr.io/PROJECT_ID/URL_MANAGER_IMAGE:TAG
+      ports:
+        - name: url-manager-p
+          containerPort: 3005
+      env:
+        - name: SERVICE_HOST
+          value: "crawler-service"
+        - name: SERVICE_PORT
+          value: "7878"
+        - name: BASE_DATE
+          value: "2022-05-11"
+
+---
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: url-manager-pod-21
+  labels:
+    app: url-manager-pod
+spec:
+  imagePullSecrets: 
+    - name: regcred
+  containers:
+    - name: url-manager-pod-21
+      image: gcr.io/PROJECT_ID/URL_MANAGER_IMAGE:TAG
+      ports:
+        - name: url-manager-p
+          containerPort: 3005
+      env:
+        - name: SERVICE_HOST
+          value: "crawler-service"
+        - name: SERVICE_PORT
+          value: "7878"
+        - name: BASE_DATE
+          value: "2022-05-10"
+
+---
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: url-manager-pod-22
+  labels:
+    app: url-manager-pod
+spec:
+  imagePullSecrets: 
+    - name: regcred
+  containers:
+    - name: url-manager-pod-22
+      image: gcr.io/PROJECT_ID/URL_MANAGER_IMAGE:TAG
+      ports:
+        - name: url-manager-p
+          containerPort: 3005
+      env:
+        - name: SERVICE_HOST
+          value: "crawler-service"
+        - name: SERVICE_PORT
+          value: "7878"
+        - name: BASE_DATE
+          value: "2022-05-09"
+
+---
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: url-manager-pod-23
+  labels:
+    app: url-manager-pod
+spec:
+  imagePullSecrets: 
+    - name: regcred
+  containers:
+    - name: url-manager-pod-23
+      image: gcr.io/PROJECT_ID/URL_MANAGER_IMAGE:TAG
+      ports:
+        - name: url-manager-p
+          containerPort: 3005
+      env:
+        - name: SERVICE_HOST
+          value: "crawler-service"
+        - name: SERVICE_PORT
+          value: "7878"
+        - name: BASE_DATE
+          value: "2022-05-08"
+
+---
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: url-manager-pod-24
+  labels:
+    app: url-manager-pod
+spec:
+  imagePullSecrets: 
+    - name: regcred
+  containers:
+    - name: url-manager-pod-24
+      image: gcr.io/PROJECT_ID/URL_MANAGER_IMAGE:TAG
+      ports:
+        - name: url-manager-p
+          containerPort: 3005
+      env:
+        - name: SERVICE_HOST
+          value: "crawler-service"
+        - name: SERVICE_PORT
+          value: "7878"
+        - name: BASE_DATE
+          value: "2022-05-07"
+
+---
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: url-manager-pod-25
+  labels:
+    app: url-manager-pod
+spec:
+  imagePullSecrets: 
+    - name: regcred
+  containers:
+    - name: url-manager-pod-25
+      image: gcr.io/PROJECT_ID/URL_MANAGER_IMAGE:TAG
+      ports:
+        - name: url-manager-p
+          containerPort: 3005
+      env:
+        - name: SERVICE_HOST
+          value: "crawler-service"
+        - name: SERVICE_PORT
+          value: "7878"
+        - name: BASE_DATE
+          value: "2022-05-06"
+
+---
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: url-manager-pod-26
+  labels:
+    app: url-manager-pod
+spec:
+  imagePullSecrets: 
+    - name: regcred
+  containers:
+    - name: url-manager-pod-26
+      image: gcr.io/PROJECT_ID/URL_MANAGER_IMAGE:TAG
+      ports:
+        - name: url-manager-p
+          containerPort: 3005
+      env:
+        - name: SERVICE_HOST
+          value: "crawler-service"
+        - name: SERVICE_PORT
+          value: "7878"
+        - name: BASE_DATE
+          value: "2022-05-05"
+
+---
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: url-manager-pod-27
+  labels:
+    app: url-manager-pod
+spec:
+  imagePullSecrets: 
+    - name: regcred
+  containers:
+    - name: url-manager-pod-27
+      image: gcr.io/PROJECT_ID/URL_MANAGER_IMAGE:TAG
+      ports:
+        - name: url-manager-p
+          containerPort: 3005
+      env:
+        - name: SERVICE_HOST
+          value: "crawler-service"
+        - name: SERVICE_PORT
+          value: "7878"
+        - name: BASE_DATE
+          value: "2022-05-04"
+
+---
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: url-manager-pod-28
+  labels:
+    app: url-manager-pod
+spec:
+  imagePullSecrets: 
+    - name: regcred
+  containers:
+    - name: url-manager-pod-28
+      image: gcr.io/PROJECT_ID/URL_MANAGER_IMAGE:TAG
+      ports:
+        - name: url-manager-p
+          containerPort: 3005
+      env:
+        - name: SERVICE_HOST
+          value: "crawler-service"
+        - name: SERVICE_PORT
+          value: "7878"
+        - name: BASE_DATE
+          value: "2022-05-03"
+
+---
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: url-manager-pod-29
+  labels:
+    app: url-manager-pod
+spec:
+  imagePullSecrets: 
+    - name: regcred
+  containers:
+    - name: url-manager-pod-29
+      image: gcr.io/PROJECT_ID/URL_MANAGER_IMAGE:TAG
+      ports:
+        - name: url-manager-p
+          containerPort: 3005
+      env:
+        - name: SERVICE_HOST
+          value: "crawler-service"
+        - name: SERVICE_PORT
+          value: "7878"
+        - name: BASE_DATE
+          value: "2022-05-02"
+
+---
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: url-manager-pod-30
+  labels:
+    app: url-manager-pod
+spec:
+  imagePullSecrets: 
+    - name: regcred
+  containers:
+    - name: url-manager-pod-30
+      image: gcr.io/PROJECT_ID/URL_MANAGER_IMAGE:TAG
+      ports:
+        - name: url-manager-p
+          containerPort: 3005
+      env:
+        - name: SERVICE_HOST
+          value: "crawler-service"
+        - name: SERVICE_PORT
+          value: "7878"
+        - name: BASE_DATE
+          value: "2022-05-01"
+
+---
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: url-manager-pod-31
+  labels:
+    app: url-manager-pod
+spec:
+  imagePullSecrets: 
+    - name: regcred
+  containers:
+    - name: url-manager-pod-31
+      image: gcr.io/PROJECT_ID/URL_MANAGER_IMAGE:TAG
+      ports:
+        - name: url-manager-p
+          containerPort: 3005
+      env:
+        - name: SERVICE_HOST
+          value: "crawler-service"
+        - name: SERVICE_PORT
+          value: "7878"
+        - name: BASE_DATE
+          value: "2022-04-30"
