@@ -90,6 +90,7 @@ class GoogleCrawler():
                     print(data, " posted")
                     break
                 print(response.status_code)
+                sleep(5)
 
 
 def job(conn,addr):
