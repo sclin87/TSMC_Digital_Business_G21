@@ -22,6 +22,13 @@ spec:
           value: "7878"
         - name: BASE_DATE
           value: "2022-05-31"
+      resources:
+        requests:
+          memory: "64Mi"
+          cpu: "250m"
+        limits:
+          memory: "128Mi"
+          cpu: "500m"
 
 ---
 
@@ -44,6 +51,13 @@ spec:
           value: "7878"
         - name: BASE_DATE
           value: "2022-05-30"
+      resources:
+        requests:
+          memory: "64Mi"
+          cpu: "250m"
+        limits:
+          memory: "128Mi"
+          cpu: "500m"
 
 ---
 
@@ -69,6 +83,13 @@ spec:
           value: "7878"
         - name: BASE_DATE
           value: "2022-05-29"
+      resources:
+        requests:
+          memory: "64Mi"
+          cpu: "250m"
+        limits:
+          memory: "128Mi"
+          cpu: "500m"
 
 ---
 
@@ -94,6 +115,13 @@ spec:
           value: "7878"
         - name: BASE_DATE
           value: "2022-05-28"
+      resources:
+        requests:
+          memory: "64Mi"
+          cpu: "250m"
+        limits:
+          memory: "128Mi"
+          cpu: "500m"
 
 ---
 
@@ -119,6 +147,13 @@ spec:
           value: "7878"
         - name: BASE_DATE
           value: "2022-05-27"
+      resources:
+        requests:
+          memory: "64Mi"
+          cpu: "250m"
+        limits:
+          memory: "128Mi"
+          cpu: "500m"
 
 ---
 
@@ -144,6 +179,13 @@ spec:
           value: "7878"
         - name: BASE_DATE
           value: "2022-05-26"
+      resources:
+        requests:
+          memory: "64Mi"
+          cpu: "250m"
+        limits:
+          memory: "128Mi"
+          cpu: "500m"
 
 ---
 
@@ -169,6 +211,13 @@ spec:
           value: "7878"
         - name: BASE_DATE
           value: "2022-05-25"
+      resources:
+        requests:
+          memory: "64Mi"
+          cpu: "250m"
+        limits:
+          memory: "128Mi"
+          cpu: "500m"
 
 ---
 
@@ -194,6 +243,13 @@ spec:
           value: "7878"
         - name: BASE_DATE
           value: "2022-05-24"
+      resources:
+        requests:
+          memory: "64Mi"
+          cpu: "250m"
+        limits:
+          memory: "128Mi"
+          cpu: "500m"
 
 ---
 
@@ -219,6 +275,13 @@ spec:
           value: "7878"
         - name: BASE_DATE
           value: "2022-05-23"
+      resources:
+        requests:
+          memory: "64Mi"
+          cpu: "250m"
+        limits:
+          memory: "128Mi"
+          cpu: "500m"
 
 ---
 
@@ -244,6 +307,13 @@ spec:
           value: "7878"
         - name: BASE_DATE
           value: "2022-05-22"
+      resources:
+        requests:
+          memory: "64Mi"
+          cpu: "250m"
+        limits:
+          memory: "128Mi"
+          cpu: "500m"
 
 ---
 
@@ -269,6 +339,13 @@ spec:
           value: "7878"
         - name: BASE_DATE
           value: "2022-05-21"
+      resources:
+        requests:
+          memory: "64Mi"
+          cpu: "250m"
+        limits:
+          memory: "128Mi"
+          cpu: "500m"
 
 ---
 
@@ -294,6 +371,13 @@ spec:
           value: "7878"
         - name: BASE_DATE
           value: "2022-05-20"
+      resources:
+        requests:
+          memory: "64Mi"
+          cpu: "250m"
+        limits:
+          memory: "128Mi"
+          cpu: "500m"
 
 ---
 
@@ -319,6 +403,13 @@ spec:
           value: "7878"
         - name: BASE_DATE
           value: "2022-05-19"
+      resources:
+        requests:
+          memory: "64Mi"
+          cpu: "250m"
+        limits:
+          memory: "128Mi"
+          cpu: "500m"
 
 ---
 
@@ -344,6 +435,13 @@ spec:
           value: "7878"
         - name: BASE_DATE
           value: "2022-05-18"
+      resources:
+        requests:
+          memory: "64Mi"
+          cpu: "250m"
+        limits:
+          memory: "128Mi"
+          cpu: "500m"
 
 ---
 
@@ -369,6 +467,13 @@ spec:
           value: "7878"
         - name: BASE_DATE
           value: "2022-05-17"
+      resources:
+        requests:
+          memory: "64Mi"
+          cpu: "250m"
+        limits:
+          memory: "128Mi"
+          cpu: "500m"
 
 ---
 
@@ -394,6 +499,13 @@ spec:
           value: "7878"
         - name: BASE_DATE
           value: "2022-05-16"
+      resources:
+        requests:
+          memory: "64Mi"
+          cpu: "250m"
+        limits:
+          memory: "128Mi"
+          cpu: "500m"
 
 ---
 
@@ -419,6 +531,13 @@ spec:
           value: "7878"
         - name: BASE_DATE
           value: "2022-05-15"
+      resources:
+        requests:
+          memory: "64Mi"
+          cpu: "250m"
+        limits:
+          memory: "128Mi"
+          cpu: "500m"
 
 ---
 
@@ -444,6 +563,13 @@ spec:
           value: "7878"
         - name: BASE_DATE
           value: "2022-05-14"
+      resources:
+        requests:
+          memory: "64Mi"
+          cpu: "250m"
+        limits:
+          memory: "128Mi"
+          cpu: "500m"
 
 ---
 
@@ -469,6 +595,13 @@ spec:
           value: "7878"
         - name: BASE_DATE
           value: "2022-05-13"
+      resources:
+        requests:
+          memory: "64Mi"
+          cpu: "250m"
+        limits:
+          memory: "128Mi"
+          cpu: "500m"
 
 ---
 
@@ -494,6 +627,13 @@ spec:
           value: "7878"
         - name: BASE_DATE
           value: "2022-05-12"
+      resources:
+        requests:
+          memory: "64Mi"
+          cpu: "250m"
+        limits:
+          memory: "128Mi"
+          cpu: "500m"
 
 ---
 
@@ -519,6 +659,13 @@ spec:
           value: "7878"
         - name: BASE_DATE
           value: "2022-05-11"
+      resources:
+        requests:
+          memory: "64Mi"
+          cpu: "250m"
+        limits:
+          memory: "128Mi"
+          cpu: "500m"
 
 ---
 
@@ -544,6 +691,13 @@ spec:
           value: "7878"
         - name: BASE_DATE
           value: "2022-05-10"
+      resources:
+        requests:
+          memory: "64Mi"
+          cpu: "250m"
+        limits:
+          memory: "128Mi"
+          cpu: "500m"
 
 ---
 
@@ -569,6 +723,13 @@ spec:
           value: "7878"
         - name: BASE_DATE
           value: "2022-05-09"
+      resources:
+        requests:
+          memory: "64Mi"
+          cpu: "250m"
+        limits:
+          memory: "128Mi"
+          cpu: "500m"
 
 ---
 
@@ -594,7 +755,13 @@ spec:
           value: "7878"
         - name: BASE_DATE
           value: "2022-05-08"
-
+      resources:
+        requests:
+          memory: "64Mi"
+          cpu: "250m"
+        limits:
+          memory: "128Mi"
+          cpu: "500m"
 ---
 
 apiVersion: v1
@@ -619,7 +786,13 @@ spec:
           value: "7878"
         - name: BASE_DATE
           value: "2022-05-07"
-
+      resources:
+        requests:
+          memory: "64Mi"
+          cpu: "250m"
+        limits:
+          memory: "128Mi"
+          cpu: "500m"
 ---
 
 apiVersion: v1
@@ -644,6 +817,13 @@ spec:
           value: "7878"
         - name: BASE_DATE
           value: "2022-05-06"
+      resources:
+        requests:
+          memory: "64Mi"
+          cpu: "250m"
+        limits:
+          memory: "128Mi"
+          cpu: "500m"
 
 ---
 
@@ -669,6 +849,13 @@ spec:
           value: "7878"
         - name: BASE_DATE
           value: "2022-05-05"
+      resources:
+        requests:
+          memory: "64Mi"
+          cpu: "250m"
+        limits:
+          memory: "128Mi"
+          cpu: "500m"
 
 ---
 
@@ -694,6 +881,13 @@ spec:
           value: "7878"
         - name: BASE_DATE
           value: "2022-05-04"
+      resources:
+        requests:
+          memory: "64Mi"
+          cpu: "250m"
+        limits:
+          memory: "128Mi"
+          cpu: "500m"
 
 ---
 
@@ -719,6 +913,13 @@ spec:
           value: "7878"
         - name: BASE_DATE
           value: "2022-05-03"
+      resources:
+        requests:
+          memory: "64Mi"
+          cpu: "250m"
+        limits:
+          memory: "128Mi"
+          cpu: "500m"
 
 ---
 
@@ -744,6 +945,13 @@ spec:
           value: "7878"
         - name: BASE_DATE
           value: "2022-05-02"
+      resources:
+        requests:
+          memory: "64Mi"
+          cpu: "250m"
+        limits:
+          memory: "128Mi"
+          cpu: "500m"
 
 ---
 
@@ -769,6 +977,13 @@ spec:
           value: "7878"
         - name: BASE_DATE
           value: "2022-05-01"
+      resources:
+        requests:
+          memory: "64Mi"
+          cpu: "250m"
+        limits:
+          memory: "128Mi"
+          cpu: "500m"
 
 ---
 
@@ -794,3 +1009,10 @@ spec:
           value: "7878"
         - name: BASE_DATE
           value: "2022-04-30"
+      resources:
+        requests:
+          memory: "64Mi"
+          cpu: "250m"
+        limits:
+          memory: "128Mi"
+          cpu: "500m"
