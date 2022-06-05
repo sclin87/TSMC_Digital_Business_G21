@@ -51,18 +51,24 @@ def cur_time_str():
     return datetime.datetime.now(tz=tz).strftime('%Y-%m-%d %H:%M:%S')
 
 def send_links(links, date):
-    try:
+    # try:
         print('[%s] Sending links to %s:%d' % (cur_time_str(), service_host, service_port))
-        for link in links:
-            sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-            sock.connect((service_host, service_port))
-            outstr = date.strftime('%Y-%m-%d') + ' ' + link + '\n'
-            sock.sendall(outstr.encode('ascii'))
-            sock.close()
+        #for i in range(len(links)):
+        i = 0
+        while(i < len(links)):
+            try:
+                sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+                sock.connect((service_host, service_port))
+                outstr = date.strftime('%Y-%m-%d') + ' ' + links[i] + '\n'
+                sock.sendall(outstr.encode('ascii'))
+                sock.close()
+            except:
+                i -= 1
+                time.sleep(10)
         print('[%s] Sent %d link(s)' % (cur_time_str(), len(links)))
-    except socket.error as e:
-        print(e, file=sys.stderr)
-        os._exit(1)
+    # except socket.error as e:
+    #     print(e, file=sys.stderr)
+    #     os._exit(1)
 
 @schedule.repeat(schedule.every(8).minutes)
 def search():

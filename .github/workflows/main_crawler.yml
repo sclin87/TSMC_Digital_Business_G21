@@ -71,7 +71,7 @@ jobs:
     # Deploy the Docker image to the GKE cluster
     - name: Deploy
       run: |-
-        cd ./k8s # 如果 mainfest 是放在某一個資料夾，這邊要替換成該資料夾名稱
+        cd ./Crawler/k8s # 如果 mainfest 是放在某一個資料夾，這邊要替換成該資料夾名稱
         ./kustomize edit set image gcr.io/PROJECT_ID/CRAWLER_IMAGE:TAG=gcr.io/$PROJECT_ID/$CRAWLER_IMAGE:$GITHUB_SHA
         ./kustomize build . | kubectl apply -f -
         kubectl rollout status deployment/$DEPLOYMENT_NAME
