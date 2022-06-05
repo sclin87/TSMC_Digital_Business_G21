@@ -4,9 +4,10 @@ import requests, schedule
 import sys, os, socket, time, datetime
 
 base_date = datetime.datetime.strptime(os.getenv("BASE_DATE"), '%Y-%m-%d')
-pods = 32
+pods = 8
 service_host = os.getenv("SERVICE_HOST")
 service_port = int(os.getenv("SERVICE_PORT"))
+keyword = os.getenv("GOOGLE_KEYWORD")
 
 class UrlGenerator():
     def __init__(self):
@@ -63,23 +64,13 @@ def send_links(links, date):
         print(e, file=sys.stderr)
         os._exit(1)
 
-def search_func(query):
-    global base_date
-    print('[%s] %s @ %s' % (cur_time_str(), query, base_date.strftime('%Y-%m-%d')))
-    generator = UrlGenerator()
-    links = generator.generate_url(base_date, query, num=100)
-    send_links(links, base_date)
-
-@schedule.repeat(schedule.every(32).minutes)
+@schedule.repeat(schedule.every(8).minutes)
 def search():
-    search_func('TSMC')
-    time.sleep(475)
-    search_func('ASML')
-    time.sleep(475)
-    search_func('Applied+Materials')
-    time.sleep(475)
-    search_func('SUMCO')
     global base_date
+    print('[%s] %s @ %s' % (cur_time_str(), keyword, base_date.strftime('%Y-%m-%d')))
+    generator = UrlGenerator()
+    links = generator.generate_url(base_date, keyword, num=100)
+    send_links(links, base_date)
     base_date = base_date - datetime.timedelta(days=pods)
 
 if __name__ == '__main__':

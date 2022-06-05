@@ -22,6 +22,8 @@ spec:
           value: "7878"
         - name: BASE_DATE
           value: "2022-05-31"
+        - name: GOOGLE_KEYWORD
+          value: "TSMC"
       resources:
         requests:
           memory: "64Mi"
@@ -50,7 +52,9 @@ spec:
         - name: SERVICE_PORT
           value: "7878"
         - name: BASE_DATE
-          value: "2022-05-30"
+          value: "2022-05-31"
+        - name: GOOGLE_KEYWORD
+          value: "ASML"
       resources:
         requests:
           memory: "64Mi"
@@ -82,7 +86,9 @@ spec:
         - name: SERVICE_PORT
           value: "7878"
         - name: BASE_DATE
-          value: "2022-05-29"
+          value: "2022-05-31"
+        - name: GOOGLE_KEYWORD
+          value: "Applied+Materials"
       resources:
         requests:
           memory: "64Mi"
@@ -114,7 +120,9 @@ spec:
         - name: SERVICE_PORT
           value: "7878"
         - name: BASE_DATE
-          value: "2022-05-28"
+          value: "2022-05-31"
+        - name: GOOGLE_KEYWORD
+          value: "SUMCO"
       resources:
         requests:
           memory: "64Mi"
@@ -146,7 +154,9 @@ spec:
         - name: SERVICE_PORT
           value: "7878"
         - name: BASE_DATE
-          value: "2022-05-27"
+          value: "2022-05-30"
+        - name: GOOGLE_KEYWORD
+          value: "TSMC"
       resources:
         requests:
           memory: "64Mi"
@@ -178,7 +188,9 @@ spec:
         - name: SERVICE_PORT
           value: "7878"
         - name: BASE_DATE
-          value: "2022-05-26"
+          value: "2022-05-30"
+        - name: GOOGLE_KEYWORD
+          value: "ASML"
       resources:
         requests:
           memory: "64Mi"
@@ -210,7 +222,9 @@ spec:
         - name: SERVICE_PORT
           value: "7878"
         - name: BASE_DATE
-          value: "2022-05-25"
+          value: "2022-05-30"
+        - name: GOOGLE_KEYWORD
+          value: "Applied+Materials"
       resources:
         requests:
           memory: "64Mi"
@@ -242,7 +256,9 @@ spec:
         - name: SERVICE_PORT
           value: "7878"
         - name: BASE_DATE
-          value: "2022-05-24"
+          value: "2022-05-30"
+        - name: GOOGLE_KEYWORD
+          value: "SUMCO"
       resources:
         requests:
           memory: "64Mi"
@@ -274,7 +290,9 @@ spec:
         - name: SERVICE_PORT
           value: "7878"
         - name: BASE_DATE
-          value: "2022-05-23"
+          value: "2022-05-29"
+        - name: GOOGLE_KEYWORD
+          value: "TSMC"
       resources:
         requests:
           memory: "64Mi"
@@ -306,7 +324,9 @@ spec:
         - name: SERVICE_PORT
           value: "7878"
         - name: BASE_DATE
-          value: "2022-05-22"
+          value: "2022-05-29"
+        - name: GOOGLE_KEYWORD
+          value: "ASML"
       resources:
         requests:
           memory: "64Mi"
@@ -338,7 +358,9 @@ spec:
         - name: SERVICE_PORT
           value: "7878"
         - name: BASE_DATE
-          value: "2022-05-21"
+          value: "2022-05-29"
+        - name: GOOGLE_KEYWORD
+          value: "Applied+Materials"
       resources:
         requests:
           memory: "64Mi"
@@ -370,7 +392,9 @@ spec:
         - name: SERVICE_PORT
           value: "7878"
         - name: BASE_DATE
-          value: "2022-05-20"
+          value: "2022-05-29"
+        - name: GOOGLE_KEYWORD
+          value: "SUMCO"
       resources:
         requests:
           memory: "64Mi"
@@ -402,7 +426,9 @@ spec:
         - name: SERVICE_PORT
           value: "7878"
         - name: BASE_DATE
-          value: "2022-05-19"
+          value: "2022-05-28"
+        - name: GOOGLE_KEYWORD
+          value: "TSMC"
       resources:
         requests:
           memory: "64Mi"
@@ -434,7 +460,9 @@ spec:
         - name: SERVICE_PORT
           value: "7878"
         - name: BASE_DATE
-          value: "2022-05-18"
+          value: "2022-05-28"
+        - name: GOOGLE_KEYWORD
+          value: "ASML"
       resources:
         requests:
           memory: "64Mi"
@@ -466,7 +494,9 @@ spec:
         - name: SERVICE_PORT
           value: "7878"
         - name: BASE_DATE
-          value: "2022-05-17"
+          value: "2022-05-28"
+        - name: GOOGLE_KEYWORD
+          value: "Applied+Materials"
       resources:
         requests:
           memory: "64Mi"
@@ -498,7 +528,9 @@ spec:
         - name: SERVICE_PORT
           value: "7878"
         - name: BASE_DATE
-          value: "2022-05-16"
+          value: "2022-05-28"
+        - name: GOOGLE_KEYWORD
+          value: "SUMCO"
       resources:
         requests:
           memory: "64Mi"
@@ -530,7 +562,9 @@ spec:
         - name: SERVICE_PORT
           value: "7878"
         - name: BASE_DATE
-          value: "2022-05-15"
+          value: "2022-05-27"
+        - name: GOOGLE_KEYWORD
+          value: "TSMC"
       resources:
         requests:
           memory: "64Mi"
@@ -562,7 +596,9 @@ spec:
         - name: SERVICE_PORT
           value: "7878"
         - name: BASE_DATE
-          value: "2022-05-14"
+          value: "2022-05-27"
+        - name: GOOGLE_KEYWORD
+          value: "ASML"
       resources:
         requests:
           memory: "64Mi"
@@ -594,7 +630,9 @@ spec:
         - name: SERVICE_PORT
           value: "7878"
         - name: BASE_DATE
-          value: "2022-05-13"
+          value: "2022-05-27"
+        - name: GOOGLE_KEYWORD
+          value: "Applied+Materials"
       resources:
         requests:
           memory: "64Mi"
@@ -626,7 +664,9 @@ spec:
         - name: SERVICE_PORT
           value: "7878"
         - name: BASE_DATE
-          value: "2022-05-12"
+          value: "2022-05-27"
+        - name: GOOGLE_KEYWORD
+          value: "SUMCO"
       resources:
         requests:
           memory: "64Mi"
@@ -658,7 +698,9 @@ spec:
         - name: SERVICE_PORT
           value: "7878"
         - name: BASE_DATE
-          value: "2022-05-11"
+          value: "2022-05-26"
+        - name: GOOGLE_KEYWORD
+          value: "TSMC"
       resources:
         requests:
           memory: "64Mi"
@@ -690,7 +732,9 @@ spec:
         - name: SERVICE_PORT
           value: "7878"
         - name: BASE_DATE
-          value: "2022-05-10"
+          value: "2022-05-26"
+        - name: GOOGLE_KEYWORD
+          value: "ASML"
       resources:
         requests:
           memory: "64Mi"
@@ -722,7 +766,9 @@ spec:
         - name: SERVICE_PORT
           value: "7878"
         - name: BASE_DATE
-          value: "2022-05-09"
+          value: "2022-05-26"
+        - name: GOOGLE_KEYWORD
+          value: "Applied+Materials"
       resources:
         requests:
           memory: "64Mi"
@@ -754,7 +800,9 @@ spec:
         - name: SERVICE_PORT
           value: "7878"
         - name: BASE_DATE
-          value: "2022-05-08"
+          value: "2022-05-26"
+        - name: GOOGLE_KEYWORD
+          value: "SUMCO"
       resources:
         requests:
           memory: "64Mi"
@@ -785,7 +833,9 @@ spec:
         - name: SERVICE_PORT
           value: "7878"
         - name: BASE_DATE
-          value: "2022-05-07"
+          value: "2022-05-25"
+        - name: GOOGLE_KEYWORD
+          value: "TSMC"
       resources:
         requests:
           memory: "64Mi"
@@ -816,7 +866,9 @@ spec:
         - name: SERVICE_PORT
           value: "7878"
         - name: BASE_DATE
-          value: "2022-05-06"
+          value: "2022-05-25"
+        - name: GOOGLE_KEYWORD
+          value: "ASML"
       resources:
         requests:
           memory: "64Mi"
@@ -848,7 +900,9 @@ spec:
         - name: SERVICE_PORT
           value: "7878"
         - name: BASE_DATE
-          value: "2022-05-05"
+          value: "2022-05-25"
+        - name: GOOGLE_KEYWORD
+          value: "Applied+Materials"
       resources:
         requests:
           memory: "64Mi"
@@ -880,7 +934,9 @@ spec:
         - name: SERVICE_PORT
           value: "7878"
         - name: BASE_DATE
-          value: "2022-05-04"
+          value: "2022-05-25"
+        - name: GOOGLE_KEYWORD
+          value: "SUMCO"
       resources:
         requests:
           memory: "64Mi"
@@ -912,7 +968,9 @@ spec:
         - name: SERVICE_PORT
           value: "7878"
         - name: BASE_DATE
-          value: "2022-05-03"
+          value: "2022-05-24"
+        - name: GOOGLE_KEYWORD
+          value: "TSMC"
       resources:
         requests:
           memory: "64Mi"
@@ -944,7 +1002,9 @@ spec:
         - name: SERVICE_PORT
           value: "7878"
         - name: BASE_DATE
-          value: "2022-05-02"
+          value: "2022-05-24"
+        - name: GOOGLE_KEYWORD
+          value: "ASML"
       resources:
         requests:
           memory: "64Mi"
@@ -976,7 +1036,9 @@ spec:
         - name: SERVICE_PORT
           value: "7878"
         - name: BASE_DATE
-          value: "2022-05-01"
+          value: "2022-05-24"
+        - name: GOOGLE_KEYWORD
+          value: "Applied+Materials"
       resources:
         requests:
           memory: "64Mi"
@@ -1008,7 +1070,9 @@ spec:
         - name: SERVICE_PORT
           value: "7878"
         - name: BASE_DATE
-          value: "2022-04-30"
+          value: "2022-05-24"
+        - name: GOOGLE_KEYWORD
+          value: "SUMCO"
       resources:
         requests:
           memory: "64Mi"
