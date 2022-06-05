@@ -83,9 +83,13 @@ class GoogleCrawler():
         df.to_excel(out_file , index=False)
         return
     def jsonarray_to_server(self,data_array):
-        for json in data_array:
-            response = requests.post(Flask_server, json=json)
-            print(response.status_code)
+        for data in data_array:
+            while(True):
+                response = requests.post(Flask_server, data=data)
+                if(response.status_code == 200):
+                    print(data, " posted")
+                    break
+                print(response.status_code)
 
 
 def job(conn,addr):
@@ -140,13 +144,13 @@ def job(conn,addr):
         result_wordcount = crawler.word_count(orignal_text)
         whitelist = ['ASML' , 'Applied Materials', 'TSMC', 'SUMCO']
         end_result = crawler.get_wordcount_json(whitelist , result_wordcount, Target_Date)
-        #print(end_result)
+        print(end_result)
         #crawler.jsonarray_toexcel(end_result, str(time.time()) + ".xlsx")
         #writeToDB(end_result)
         response_json = crawler.jsonarray_to_server(end_result)
         #print('Excel is OK : ' + str(time.time()) + ".xlsx")
-        print("[", datetime.datetime.now().strftime("%H:%M:%S"), "]")
-        print(response_json)
+        print("[" + datetime.datetime.now().strftime("%Y:%m:%d:%H:%M:%S") + "]")
+        #print(response_json)
         print("Job finished.\n")
         conn.send("Job success".encode("ascii"))
         break
