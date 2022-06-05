@@ -70,7 +70,7 @@ class GoogleCrawler():
         data_array = []
         for i in whitelist:
             if(i not in dict_data):
-                dict_data[i] = 10
+                dict_data[i] = 0
             json_data = {
                 'Date' : date,
                 'Company' : i , 
