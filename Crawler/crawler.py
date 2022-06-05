@@ -38,7 +38,7 @@ class GoogleCrawler():
     def get_source(self,url):
         try:
             session = HTMLSession()
-            response = session.get(url)
+            response = session.get(url, timeout=20)
             return response
         except requests.exceptions.RequestException as e:
             print(e)
@@ -70,7 +70,7 @@ class GoogleCrawler():
         data_array = []
         for i in whitelist:
             if(i not in dict_data):
-                dict_data[i] = 10
+                dict_data[i] = 0
             json_data = {
                 'Date' : date,
                 'Company' : i , 
