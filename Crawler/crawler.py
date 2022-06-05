@@ -137,17 +137,17 @@ def job(conn,addr):
             conn.close()
             break
         orignal_text = crawler.html_getText(soup)
-        #print(orignal_text[:100])
         result_wordcount = crawler.word_count(orignal_text)
         whitelist = ['ASML' , 'Applied Materials', 'TSMC', 'SUMCO']
-        #print(result_wordcount)
         end_result = crawler.get_wordcount_json(whitelist , result_wordcount, Target_Date)
         #print(end_result)
         #crawler.jsonarray_toexcel(end_result, str(time.time()) + ".xlsx")
         #writeToDB(end_result)
-        crawler.jsonarray_to_server(end_result)
+        response_json = crawler.jsonarray_to_server(end_result)
         #print('Excel is OK : ' + str(time.time()) + ".xlsx")
         print("[", datetime.datetime.now().strftime("%H:%M:%S"), "]")
+        print(response_json)
+        print("Job finished.\n")
         conn.send("Job success".encode("ascii"))
         break
     conn.close()
