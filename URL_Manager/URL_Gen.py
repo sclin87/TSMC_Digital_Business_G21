@@ -3,10 +3,10 @@ from requests_html import HTMLSession
 import requests, schedule
 import sys, os, socket, time, datetime
 
-base_date = datetime.date(2022, 5, 31) # (Y, M, D)
+base_date = datetime.datetime.strptime(os.getenv("BASE_DATE"), '%Y-%m-%d')
+pods = 32
 service_host = os.getenv("SERVICE_HOST")
 service_port = int(os.getenv("SERVICE_PORT"))
-google_key = os.getenv("GOOGLE_KEYWORD")
 
 class UrlGenerator():
     def __init__(self):
@@ -35,9 +35,9 @@ class UrlGenerator():
         links = soup.findAll("a", {"class": css_identifier_link})
         return [link['href'] for link in links]
 
-    def generate_url(self, date, num=100):
+    def generate_url(self, date, query, num=100):
         search_time = self.get_google_search_date(date)
-        return self.google_search(google_key, time=search_time, num=num)
+        return self.google_search(query, time=search_time, num=num)
 
     def get_google_search_date(self, date):
         return 'cdr%3A1%2Ccd_min%3A{month}%2F{day}%2F{year}%2Ccd_max%3A{month}%2F{day}%2F{year}'.format(
@@ -51,29 +51,61 @@ def cur_time_str():
 
 def send_links(links, date):
     try:
-        print('[' + cur_time_str() + '] Sending links to %s:%d' % (service_host, service_port))
+        print('[%s] Sending links to %s:%d' % (cur_time_str(), service_host, service_port))
         for link in links:
             sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
             sock.connect((service_host, service_port))
             outstr = date.strftime('%Y-%m-%d') + ' ' + link + '\n'
             sock.sendall(outstr.encode('ascii'))
             sock.close()
-        print('[' + cur_time_str() + '] Sent %d link(s) in %s' % (len(links), date.strftime('%Y-%m-%d')))
+        print('[%s] Sent %d link(s)' % (cur_time_str(), len(links)))
     except socket.error as e:
         print(e, file=sys.stderr)
         os._exit(1)
 
-@schedule.repeat(schedule.every(8).minutes)
-def job():
+def search_tsmc():
     global base_date
+    print('[%s] TSMC @ %s' % (cur_time_str(), base_date.strftime('%Y-%m-%d')))
     generator = UrlGenerator()
-    links = generator.generate_url(base_date, num=100)
+    links = generator.generate_url(base_date, 'TSMC', num=100)
     send_links(links, base_date)
-    base_date = base_date - datetime.timedelta(days=1)
+
+def search_asml():
+    global base_date
+    print('[%s] ASML @ %s' % (cur_time_str(), base_date.strftime('%Y-%m-%d')))
+    generator = UrlGenerator()
+    links = generator.generate_url(base_date, 'ASML', num=100)
+    send_links(links, base_date)
+
+def search_applmat():
+    global base_date
+    print('[%s] APPLIED @ %s' % (cur_time_str(), base_date.strftime('%Y-%m-%d')))
+    generator = UrlGenerator()
+    links = generator.generate_url(base_date, 'Applied+Materials', num=100)
+    send_links(links, base_date)
+
+def search_sumco():
+    global base_date
+    print('[%s] SUMCO @ %s' % (cur_time_str(), base_date.strftime('%Y-%m-%d')))
+    generator = UrlGenerator()
+    links = generator.generate_url(base_date, 'SUMCO', num=100)
+    send_links(links, base_date)
+
+@schedule.repeat(schedule.every(32).minutes)
+def search():
+    search_tsmc()
+    time.sleep(475)
+    search_asml()
+    time.sleep(475)
+    search_applmat()
+    time.sleep(475)
+    search_sumco()
+    global base_date
+    base_date = base_date - datetime.timedelta(days=pods)
 
 if __name__ == '__main__':
     # Initial Job
-    job()
+    search()
 
     # Check schedule
     while True:
