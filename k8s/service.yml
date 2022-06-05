@@ -30,7 +30,7 @@ spec:
   selector:
     visual-app: grafana
   sessionAffinity: None
-  type: NodePort
+  type: LoadBalancer
 
 ---
 
@@ -47,4 +47,4 @@ spec:
   selector:
     db-app: flask-server
   sessionAffinity: None
-  type: NodePort
+  type: LoadBalancer
