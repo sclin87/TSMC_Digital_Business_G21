@@ -65,6 +65,7 @@ def send_links(links, date):
             except:
                 i -= 1
                 time.sleep(10)
+            i += 1
         print('[%s] Sent %d link(s)' % (cur_time_str(), len(links)))
     # except socket.error as e:
     #     print(e, file=sys.stderr)
