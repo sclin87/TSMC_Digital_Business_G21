@@ -77,7 +77,7 @@ metadata:
     app: crawler-dpm
   namespace: default
 spec:
-  replicas: 16
+  replicas: 2
   selector:
     matchLabels:
       app: crawler

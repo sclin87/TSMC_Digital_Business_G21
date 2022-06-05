@@ -84,13 +84,10 @@ class GoogleCrawler():
         return
     def jsonarray_to_server(self,data_array):
         for data in data_array:
-            while(True):
-                response = requests.post(Flask_server, data=data)
-                if(response.status_code == 200):
-                    print(data, " posted")
-                    break
-                print(response.status_code)
-                time.sleep(5)
+
+            response = requests.post(Flask_server, data=data)
+            print("Status code: ", response.status_code)
+            #time.sleep(5)
 
 
 def job(conn,addr):
