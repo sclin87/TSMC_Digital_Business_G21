@@ -85,7 +85,7 @@ class GoogleCrawler():
     def jsonarray_to_server(self,data_array):
         for data in data_array:
 
-            response = requests.post(Flask_server, data=data)
+            response = requests.post(Flask_server, json=data)
             print("Status code: ", response.status_code)
             #time.sleep(5)
 
