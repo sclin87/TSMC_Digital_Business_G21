@@ -74,7 +74,7 @@ def send_links(links, date):
         i += 1
     print('[%s] Sent %d link(s)' % (cur_time_str(), len(links)))
 
-@schedule.repeat(schedule.every(8).minutes)
+@schedule.repeat(schedule.every(10).minutes)
 def search():
     global base_date
     print('[%s] %s @ %s' % (cur_time_str(), keyword, base_date.strftime('%Y-%m-%d')))
