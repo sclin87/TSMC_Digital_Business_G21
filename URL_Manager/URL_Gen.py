@@ -32,9 +32,15 @@ class UrlGenerator():
     # Google Search Result Parsing
     def parse_googleResults(self, response):
         css_identifier_link = "WlydOe"
+        css_identifier_results = "ftSUBd"
         soup = BeautifulSoup(response.text, 'html.parser')
-        links = soup.findAll("a", {"class": css_identifier_link})
-        return [link['href'] for link in links]
+        if soup.find("div", {"id": "search"}) is None:
+            print('[%s] Currently banned from google search' % (cur_time_str()))
+        results = soup.findAll("g-card", {"class": css_identifier_results})
+        links = []
+        for res in results:
+          links.append(res.find("a", {"class": css_identifier_link})['href'])
+        return links
 
     def generate_url(self, date, query, num=100):
         search_time = self.get_google_search_date(date)
@@ -51,25 +57,22 @@ def cur_time_str():
     return datetime.datetime.now(tz=tz).strftime('%Y-%m-%d %H:%M:%S')
 
 def send_links(links, date):
-    # try:
-        print('[%s] Sending links to %s:%d' % (cur_time_str(), service_host, service_port))
-        #for i in range(len(links)):
-        i = 0
-        while(i < len(links)):
-            try:
-                sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-                sock.connect((service_host, service_port))
-                outstr = date.strftime('%Y-%m-%d') + ' ' + links[i] + '\n'
-                sock.sendall(outstr.encode('ascii'))
-                sock.close()
-            except:
-                i -= 1
-                time.sleep(10)
-            i += 1
-        print('[%s] Sent %d link(s)' % (cur_time_str(), len(links)))
-    # except socket.error as e:
-    #     print(e, file=sys.stderr)
-    #     os._exit(1)
+    print('[%s] Sending links to %s:%d' % (cur_time_str(), service_host, service_port))
+    i = 0
+    while(i < len(links)):
+        sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+
+        try:
+            sock.connect((service_host, service_port))
+            outstr = date.strftime('%Y-%m-%d') + ' ' + links[i] + '\n'
+            sock.sendall(outstr.encode('ascii'))
+        except:
+            i -= 1
+            time.sleep(10)
+        
+        sock.close()
+        i += 1
+    print('[%s] Sent %d link(s)' % (cur_time_str(), len(links)))
 
 @schedule.repeat(schedule.every(8).minutes)
 def search():
