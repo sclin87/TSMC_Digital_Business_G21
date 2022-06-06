@@ -75,7 +75,7 @@ class GoogleCrawler():
         return counts
     def get_wordcount_json(self, whitelist , dict_data, date):
         data_array = []
-        for i in whitelist:            
+        for i in whitelist:
             if(i not in dict_data):
                 dict_data[i] = 0
             json_data = {
