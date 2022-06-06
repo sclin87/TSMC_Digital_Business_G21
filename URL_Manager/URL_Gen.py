@@ -75,7 +75,6 @@ def send_links(links, date):
         i += 1
     print('[%s] Sent %d link(s)' % (cur_time_str(), len(links)))
 
-@schedule.repeat(schedule.every(10).minutes)
 def search():
     global base_date, keywords, key_conut
     keyword = keywords[key_conut % 4]
@@ -88,6 +87,10 @@ def search():
     key_conut += 1
 
 if __name__ == '__main__':
+    pod_id = (datetime.date(2022, 5, 31) - base_date).days
+    time.sleep(600 * pod_id / 32)
+    schedule.every(10).minutes.do(search)
+
     # Initial Job
     search()
 
