@@ -7,7 +7,8 @@ base_date = datetime.datetime.strptime(os.getenv("BASE_DATE"), '%Y-%m-%d')
 pods = 8
 service_host = os.getenv("SERVICE_HOST")
 service_port = int(os.getenv("SERVICE_PORT"))
-keyword = os.getenv("GOOGLE_KEYWORD")
+keywords = ['TSMC', 'ASML', 'Applied+Materials', 'SUMCO']
+key_conut = 0
 
 class UrlGenerator():
     def __init__(self):
@@ -76,12 +77,15 @@ def send_links(links, date):
 
 @schedule.repeat(schedule.every(10).minutes)
 def search():
-    global base_date
+    global base_date, keywords, key_conut
+    keyword = keywords[key_conut % 4]
     print('[%s] %s @ %s' % (cur_time_str(), keyword, base_date.strftime('%Y-%m-%d')))
     generator = UrlGenerator()
     links = generator.generate_url(base_date, keyword, num=100)
     send_links(links, base_date)
-    base_date = base_date - datetime.timedelta(days=pods)
+    if key_conut % 4 == 3:
+        base_date = base_date - datetime.timedelta(days=pods)
+    key_conut += 1
 
 if __name__ == '__main__':
     # Initial Job
@@ -90,4 +94,4 @@ if __name__ == '__main__':
     # Check schedule
     while True:
         schedule.run_pending()
-        time.sleep(120)
+        time.sleep(240)
