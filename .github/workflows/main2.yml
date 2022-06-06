@@ -4,7 +4,6 @@ on:
   push:
     branches:
     - brian
-    # - yuchenZZ
 env:
   PROJECT_ID: ${{ secrets.GKE_PROJECT }}
   GKE_CLUSTER: autopilot-cluster-1    # TODO: update to cluster name
