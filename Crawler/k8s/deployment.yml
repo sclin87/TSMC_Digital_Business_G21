@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: crawler-dpm
+  labels:
+    app: crawler-dpm
+  namespace: default
+spec:
+  replicas: 10
+  selector:
+    matchLabels:
+      app: crawler
+  template:
+    metadata:
+      labels:
+        app: crawler
+    spec:
+      imagePullSecrets: 
+        - name: regcred
+      containers:
+      - name: crawler-ctn
+        image: gcr.io/PROJECT_ID/CRAWLER_IMAGE:TAG
+        ports:
+        - containerPort: 7878
+          name: crawler-p
+        env:
+          - name: SERVICE_HOST
+            value: "flask-service"
+          - name: SERVICE_PORT
+            value: "5000"
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "250m"
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
