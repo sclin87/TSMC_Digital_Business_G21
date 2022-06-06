@@ -3,10 +3,10 @@ from requests_html import HTMLSession
 import requests, schedule
 import sys, os, socket, time, datetime
 
-base_date = datetime.datetime.strptime(os.getenv("BASE_DATE"), '%Y-%m-%d')
+base_date = datetime.datetime.strptime(os.getenv("BASE_DATE"), '%Y-%m-%d') if os.getenv("BASE_DATE") is not None  else datetime.date(2022, 5, 31)
 pods = 8
-service_host = os.getenv("SERVICE_HOST")
-service_port = int(os.getenv("SERVICE_PORT"))
+service_host = os.getenv("SERVICE_HOST") if os.getenv("SERVICE_HOST") is not None  else "localhost"
+service_port = int(os.getenv("SERVICE_PORT")) if os.getenv("SERVICE_PORT") is not None  else 7878
 keywords = ['TSMC', 'ASML', 'Applied+Materials', 'SUMCO']
 key_conut = 0
 
