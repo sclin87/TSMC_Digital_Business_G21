@@ -59,16 +59,23 @@ class GoogleCrawler():
         stop_words = set(stopwords.words('english'))
         words = word_tokenize(text)
         #words = text.replace(',','').split()
+        last_word = ""
         for word in words:
+            if (last_word == "Applied" or last_word == "applied") and (word == "Materials" or word == "materials"):
+                if "Applied Materials" in counts:
+                    counts["Applied Materials"] += 1
+                else:
+                    counts["Applied Materials"] = 1
             if word not in stop_words:
                 if word in counts:
                     counts[word] += 1
                 else:
                     counts[word] = 1
+            last_word = word
         return counts
     def get_wordcount_json(self, whitelist , dict_data, date):
         data_array = []
-        for i in whitelist:
+        for i in whitelist:            
             if(i not in dict_data):
                 dict_data[i] = 0
             json_data = {
