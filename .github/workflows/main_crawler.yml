@@ -3,17 +3,13 @@ name: Build and Deploy to GKE
 on:
   push:
     branches:
-    # - brian
-    - crawler
-    # - yuchen
+    - crawler_test
 env:
   PROJECT_ID: ${{ secrets.GKE_PROJECT }}
-  GKE_CLUSTER: autopilot-cluster-1    # TODO: update to cluster name
+  GKE_CLUSTER: crawler-cluster    # TODO: update to cluster name
   GKE_ZONE: asia-east1   # TODO: update to cluster zone
   DEPLOYMENT_NAME: crawler-dpm # TODO: update to deployment name
   CRAWLER_IMAGE: crawler-image
-  URL_MANAGER_IMAGE: url-manager-image
-  FLASK_SERVER_IMAGE: flask-server-image
 
 jobs:
   setup-build-publish-deploy:
@@ -39,6 +35,7 @@ jobs:
     # helper for authentication
     - run: |-
         gcloud --quiet auth configure-docker
+        
     # Get the GKE credentials so we can deploy to the cluster
     - run: |-
         gcloud container clusters get-credentials "$GKE_CLUSTER" --zone "$GKE_ZONE"
@@ -53,14 +50,10 @@ jobs:
           --build-arg GITHUB_REF="$GITHUB_REF" \
           .
     
-    
     # Push the Docker image to Google Container Registry
     - name: Publish
       run: |-
         docker push "gcr.io/$PROJECT_ID/$CRAWLER_IMAGE:$GITHUB_SHA"
-    # - name: Publish
-    #   run: |-
-    #     docker push "gcr.io/$PROJECT_ID/$URL_MANAGER_IMAGE:$GITHUB_SHA"
 
     # Set up kustomize
     - name: Set up Kustomize
@@ -68,12 +61,12 @@ jobs:
         cd ./Crawler/k8s # 如果 mainfest 是放在某一個資料夾，這邊要替換成該資料夾名稱
         curl -sfLo kustomize https://github.com/kubernetes-sigs/kustomize/releases/download/v3.1.0/kustomize_3.1.0_linux_amd64
         chmod u+x ./kustomize
+
     # Deploy the Docker image to the GKE cluster
     - name: Deploy
       run: |-
         cd ./Crawler/k8s # 如果 mainfest 是放在某一個資料夾，這邊要替換成該資料夾名稱
         ./kustomize edit set image gcr.io/PROJECT_ID/CRAWLER_IMAGE:TAG=gcr.io/$PROJECT_ID/$CRAWLER_IMAGE:$GITHUB_SHA
-        ./kustomize build . | kubectl apply -f deployment.yml
-        ./kustomize build . | kubectl apply -f service.yml
+        ./kustomize build . | kubectl apply -f -
         kubectl rollout status deployment/$DEPLOYMENT_NAME
         kubectl get services -o wide

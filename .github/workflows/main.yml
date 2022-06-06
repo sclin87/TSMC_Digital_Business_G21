@@ -4,8 +4,7 @@ on:
   push:
     branches:
     - yuchen
-    # - main
-# //
+
 env:
   PROJECT_ID: ${{ secrets.GKE_PROJECT }}
   GKE_CLUSTER: crawler-cluster    # TODO: update to cluster name
