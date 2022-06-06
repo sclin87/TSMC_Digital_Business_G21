@@ -7,7 +7,8 @@ base_date = datetime.datetime.strptime(os.getenv("BASE_DATE"), '%Y-%m-%d')
 pods = 8
 service_host = os.getenv("SERVICE_HOST")
 service_port = int(os.getenv("SERVICE_PORT"))
-keyword = os.getenv("GOOGLE_KEYWORD")
+keywords = ['TSMC', 'ASML', 'Applied+Materials', 'SUMCO']
+key_conut = 0
 
 class UrlGenerator():
     def __init__(self):
@@ -32,9 +33,15 @@ class UrlGenerator():
     # Google Search Result Parsing
     def parse_googleResults(self, response):
         css_identifier_link = "WlydOe"
+        css_identifier_results = "ftSUBd"
         soup = BeautifulSoup(response.text, 'html.parser')
-        links = soup.findAll("a", {"class": css_identifier_link})
-        return [link['href'] for link in links]
+        if soup.find("div", {"id": "search"}) is None:
+            print('[%s] Currently banned from google search' % (cur_time_str()))
+        results = soup.findAll("g-card", {"class": css_identifier_results})
+        links = []
+        for res in results:
+          links.append(res.find("a", {"class": css_identifier_link})['href'])
+        return links
 
     def generate_url(self, date, query, num=100):
         search_time = self.get_google_search_date(date)
@@ -51,34 +58,34 @@ def cur_time_str():
     return datetime.datetime.now(tz=tz).strftime('%Y-%m-%d %H:%M:%S')
 
 def send_links(links, date):
-    # try:
-        print('[%s] Sending links to %s:%d' % (cur_time_str(), service_host, service_port))
-        #for i in range(len(links)):
-        i = 0
-        while(i < len(links)):
-            try:
-                sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-                sock.connect((service_host, service_port))
-                outstr = date.strftime('%Y-%m-%d') + ' ' + links[i] + '\n'
-                sock.sendall(outstr.encode('ascii'))
-                sock.close()
-            except:
-                i -= 1
-                time.sleep(10)
-            i += 1
-        print('[%s] Sent %d link(s)' % (cur_time_str(), len(links)))
-    # except socket.error as e:
-    #     print(e, file=sys.stderr)
-    #     os._exit(1)
+    print('[%s] Sending links to %s:%d' % (cur_time_str(), service_host, service_port))
+    i = 0
+    while(i < len(links)):
+        sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 
-@schedule.repeat(schedule.every(8).minutes)
+        try:
+            sock.connect((service_host, service_port))
+            outstr = date.strftime('%Y-%m-%d') + ' ' + links[i] + '\n'
+            sock.sendall(outstr.encode('ascii'))
+        except:
+            i -= 1
+            time.sleep(10)
+        
+        sock.close()
+        i += 1
+    print('[%s] Sent %d link(s)' % (cur_time_str(), len(links)))
+
+@schedule.repeat(schedule.every(10).minutes)
 def search():
-    global base_date
+    global base_date, keywords, key_conut
+    keyword = keywords[key_conut % 4]
     print('[%s] %s @ %s' % (cur_time_str(), keyword, base_date.strftime('%Y-%m-%d')))
     generator = UrlGenerator()
     links = generator.generate_url(base_date, keyword, num=100)
     send_links(links, base_date)
-    base_date = base_date - datetime.timedelta(days=pods)
+    if key_conut % 4 == 3:
+        base_date = base_date - datetime.timedelta(days=pods)
+    key_conut += 1
 
 if __name__ == '__main__':
     # Initial Job
@@ -87,4 +94,4 @@ if __name__ == '__main__':
     # Check schedule
     while True:
         schedule.run_pending()
-        time.sleep(120)
+        time.sleep(240)
