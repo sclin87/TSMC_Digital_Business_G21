@@ -98,15 +98,38 @@
 
 經過一段時間的爬蟲，可利用**Grafana的Service IP**進入Grafana Dashboard觀看關鍵字熱度分布。
 
-## GoogleTrend API 以及 Google Trend網頁結果比較
-
+### GoogleTrend API和自己寫的爬蟲結果比較
 ### GoogleTrend API:
+- 使用GoogleTrend以前需要先下載環境
+![](https://i.imgur.com/G86s0Mt.png)
+- 列出從2022年1月至2022年5月在台灣搜尋的關鍵字次數
+- GoogleTrend API在使用時需要設定關鍵字、搜尋地點、日期，以及使用內建的畫圖功能呈現出搜尋結果
+![](https://i.imgur.com/qe1BAdf.png)
 
-![](imgs/google_trend2.png)
+![](https://i.imgur.com/rLCwFZH.png)
 
+### 自訂爬蟲結果呈現:
+- 讀取儲存在資料庫中的關鍵字資料並且以dictionary的方式存取
+![](https://i.imgur.com/xgbrH0A.png)
+- 分別存取GoogleTrend以及資料庫的搜尋結果，GoogleTrend如果沒有找到任何搜尋關鍵字會以None的資料型態儲存起來，因此需要將資料轉換成都是0的list才能畫出圖片
+![](https://i.imgur.com/dxeLKD4.png)
+- 以下為2022/1/1~2022/5/31每天的關鍵字搜尋次數
+- **TSMC**
+![](https://i.imgur.com/sPg2vTu.png)
+- **ASML**
+![](https://i.imgur.com/nzTzVMT.png)
+- **SUMCO**
+![](https://i.imgur.com/8zwNnWG.png)
+- **Applied Materials**
+![](https://i.imgur.com/cSCabut.png)
 
-### GoogleTrend瀏覽器:
-
-![](imgs/google_trend1.png)
-
-## 問題與討論
+### GoogleTrend API & Our Method:
+- 以下為2022/1/1~2022/5/31每天的關鍵字搜尋次數
+- **TSMC**
+![](https://i.imgur.com/OlVVMIJ.png)
+- **ASML**
+![](https://i.imgur.com/gFjwFbZ.png)
+- **SUMCO**
+![](https://i.imgur.com/yCkfAfH.png)
+- **Applied Materials**
+![](https://i.imgur.com/dxvZONW.png)
