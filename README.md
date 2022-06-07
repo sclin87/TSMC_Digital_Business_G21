@@ -75,6 +75,9 @@
     - 測試結果會長這樣
 
     ![](imgs/test.png)
+    
+- 測試 URL_Gen.py  
+    ```python3 -m pytest ./tests/test_url_gen.py```
 
 ### CD - GKE
 
